@@ -15,6 +15,8 @@ public class Dog {
     private double weight;
     private String quote;
 
+    public Dog() {}
+    
     public Dog(String name, int age, double weight, String quote) {
         this.name = name;
         this.age = age;
