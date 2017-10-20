@@ -28,15 +28,15 @@
                 <th>Le Chien dit :</th>
                 <th>Pour tuer le chien</th>
             </tr>
-            
+            <c:forEach var="dog" items="${requestScope.dogs}" varStatus="status"> 
                 <tr>
-                    <td>dog.name</td>
-                    <td>dog.age</td>
-                    <td>dog.weight</td>
-                    <td>dog.quote</td>
-                    <td>${requestScope.uris}</td>
+                    <td>${dog.name}</td>
+                    <td>${dog.age}</td>
+                    <td>${dog.weight}</td>
+                    <td>${dog.quote}</td>
+                    <td>${requestScope.uris[status.index]}</td>
                 </tr>
-            
+            </c:forEach>
         </table>
     </body>
     
