@@ -34,7 +34,7 @@
                     <td>${dog.age}</td>
                     <td>${dog.weight}</td>
                     <td>${dog.quote}</td>
-                    <td>${requestScope.uris[status.index]}</td>
+                    <td><a href="${requestScope.uris[status.index]}" > Tuer le chien </a></td>
                 </tr>
             </c:forEach>
         </table>

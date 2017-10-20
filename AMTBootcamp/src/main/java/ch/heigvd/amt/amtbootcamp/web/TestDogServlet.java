@@ -76,14 +76,15 @@ public class TestDogServlet extends HttpServlet {
 //        }
         
         //String uris = dogRessource.createLinkDeleteDog(dogs.get(0)).toString();
-        // Création des lien de suppressions des chiens
-        //List<URI> uris2 = dogRessource.createLinksDeleteDogs(dogs);
-        //List<String> urisS = dogRessource.createStringLinksDeleteDogs(uris);
-        List<String> uris = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
+        
+// Création des lien de suppressions des chiens
+        List<URI> uris = dogRessource.createLinksDelete(dogs);
+        List<String> urisS = dogRessource.createStringLinks(uris);
+        //List<String> uris = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
         
         // Ajout des attributs dans la requête
         request.setAttribute("dogs", dogs);
-        request.setAttribute("uris", uris);
+        request.setAttribute("uris", urisS);
         
         // Forward de la requête
         request.getRequestDispatcher("/WEB-INF/pages/Dog.jsp").forward(request, response);
