@@ -13,10 +13,13 @@ import ch.heigvd.amt.amtbootcamp.services.TestDogGenerationLocal;
 import ch.heigvd.amt.amtbootcamp.services.dao.DeleteDogLocal;
 import ch.heigvd.amt.amtbootcamp.services.dao.GetDog;
 import ch.heigvd.amt.amtbootcamp.services.dao.GetDogLocal;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -37,10 +40,7 @@ public class TestDogServlet extends HttpServlet {
     
     @EJB
     private DeleteDogLocal deleteDog;
-    
-    @Context
-    UriInfo uriInfo;
-    
+        
     private final String PAGE_ATTRIBUT = "page";
     private final String ENTRY_ATTRIBUT = "entry";
 
@@ -69,12 +69,13 @@ public class TestDogServlet extends HttpServlet {
         }
         
         List<DogDTO> dogs = getDog.findDogsPages(defaultPageNumber, defaultDogsInPage);
-//        List<URI> uris = deleteDog.createLinksDeleteDogs(dogs);
-//        
+        
+        //List<URI> uris = deleteDog.createLinksDeleteDogs(dogs);
+        //List<String> urisS = deleteDog.createStringLinksDeleteDogs(uris);
+        List<String> uris = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
         request.setAttribute("dogs", dogs);
-//        request.setAttribute("uris", uris);
-//
-//        
+        request.setAttribute("uris", uris);
+        
         request.getRequestDispatcher("/WEB-INF/pages/Dog.jsp").forward(request, response);
     }
 
