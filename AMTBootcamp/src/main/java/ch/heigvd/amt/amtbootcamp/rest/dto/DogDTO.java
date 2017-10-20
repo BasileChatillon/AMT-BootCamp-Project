@@ -8,7 +8,7 @@ package ch.heigvd.amt.amtbootcamp.rest.dto;
 import ch.heigvd.amt.amtbootcamp.model.Dog;
 
 /**
- *
+ * L'ID a été rajoutée pour permettre à l'utilisateur d'utiliser l'API
  * @author basilechatillon
  */
 public class DogDTO {

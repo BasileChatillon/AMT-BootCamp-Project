@@ -37,6 +37,11 @@ public class DogCreate {
     CreateDogLocal createDog;
     
     
+    /**
+     * Permet d'ajouter un chien dans la base de donnée
+     * @param dog le chien qui sera crée
+     * @return retourn un erreur si le chien n'a pas été créé, ou l'URL pour recevoir les infromations du chien
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createResponse(Dog dog){
@@ -56,6 +61,11 @@ public class DogCreate {
                        .build();
     }
     
+    /**
+     * Permet de créer l'URL pour visioner un chien.
+     * @param ID l'ID du chien dont on doit créer l'URL
+     * @return L'URI
+     */
     public URI createLink(int ID){
         return uriInfo.getBaseUriBuilder()
                       .path(DogGet.class)

@@ -6,6 +6,10 @@
 package ch.heigvd.amt.amtbootcamp.rest;
 
 import ch.heigvd.amt.amtbootcamp.rest.dto.DogDTO;
+import ch.heigvd.amt.amtbootcamp.services.dao.CreateDogLocal;
+import ch.heigvd.amt.amtbootcamp.services.dao.GetDogLocal;
+import java.net.URI;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,10 +29,31 @@ public class DogGet {
     @Context
     UriInfo uriInfo;
     
+    @EJB
+    GetDogLocal getDog;
+    
+    /**
+     * Permet de récuprer les inforamtions d'un chien 
+     * @param id l'ID du chien dont on veut obtenir les informations
+     * @return Le JSON du chien
+     */
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public DogDTO dogGet(@PathParam("id") int id){
-        return null;
+        return getDog.findDog(id);
+    }
+    
+    /**
+     * Permet de créer le lien de récupération d'un chien
+     * @param dog Le chien qui va permettre la création de l'ID
+     * @return l'URI destiné à la suppresion du chien
+     */
+    public URI CreateLinkGet(DogDTO dog) {
+        // Crée l'url pour pouvoir récupérer le chien
+        return uriInfo.getBaseUriBuilder()
+                      .path(DogGet.class)
+                      .path(DogGet.class, "dogGet")
+                      .build(dog.getID());        
     }
 }
