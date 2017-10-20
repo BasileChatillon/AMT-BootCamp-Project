@@ -8,10 +8,12 @@ package ch.heigvd.amt.amtbootcamp.rest;
 import ch.heigvd.amt.amtbootcamp.rest.dto.DogDTO;
 import ch.heigvd.amt.amtbootcamp.services.dao.DeleteDogLocal;
 import ch.heigvd.amt.amtbootcamp.services.dao.GetDogLocal;
+import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -26,7 +28,6 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 @Path("/dog/delete")
 public class DogDelete {
-    
     @Context
     UriInfo uriInfo;
     
@@ -46,5 +47,25 @@ public class DogDelete {
             return dogToDelete;
             
         return null;
+    }
+    
+    public URI createLinkDeleteDog(DogDTO dog) {
+        // Crée l'url de la ressource qu'on vient de créer
+        return uriInfo.getBaseUriBuilder()
+                      .path(DogDelete.class)
+                      .path(DogDelete.class, "dogDelete")
+                      .build(dog.getID());        
+    }
+
+    public List<URI> createLinksDeleteDogs(List<DogDTO> dogs) {
+        return dogs.stream()
+                   .map(dog -> createLinkDeleteDog(dog))
+                   .collect(Collectors.toList());
+    }
+    
+    public List<String> createStringLinksDeleteDogs(List<URI> uris) {
+        return uris.stream()
+                   .map(uri -> uri.toString())
+                   .collect(Collectors.toList());
     }
 }

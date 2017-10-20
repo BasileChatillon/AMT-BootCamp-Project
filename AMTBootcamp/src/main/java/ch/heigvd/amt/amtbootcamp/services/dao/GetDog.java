@@ -5,7 +5,6 @@
  */
 package ch.heigvd.amt.amtbootcamp.services.dao;
 
-import ch.heigvd.amt.amtbootcamp.model.Dog;
 import ch.heigvd.amt.amtbootcamp.rest.dto.DogDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

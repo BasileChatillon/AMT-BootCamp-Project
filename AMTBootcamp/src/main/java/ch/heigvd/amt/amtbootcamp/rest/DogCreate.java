@@ -49,14 +49,18 @@ public class DogCreate {
                            .build();
         }
         
-        URI addresse = uriInfo.getBaseUriBuilder()
-                              .path(DogGet.class)
-                              .path(DogGet.class, "dogGet")
-                              .build(newDog.getID());
+        URI addresse = createLink(newDog.getID());
         
         return Response.created(addresse)
                        .status(Response.Status.CREATED)
                        .build();
+    }
+    
+    public URI createLink(int ID){
+        return uriInfo.getBaseUriBuilder()
+                      .path(DogGet.class)
+                      .path(DogGet.class, "dogGet")
+                      .build(ID);
     }
 }
 

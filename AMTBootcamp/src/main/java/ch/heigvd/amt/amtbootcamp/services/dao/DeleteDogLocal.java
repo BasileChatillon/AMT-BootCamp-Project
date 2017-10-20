@@ -5,9 +5,6 @@
  */
 package ch.heigvd.amt.amtbootcamp.services.dao;
 
-import ch.heigvd.amt.amtbootcamp.rest.dto.DogDTO;
-import java.net.URI;
-import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -16,9 +13,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface DeleteDogLocal {
-    public boolean deleteDog(int id);
-    
-    public URI createLinkDeleteDog(DogDTO dog);
-    public List<URI> createLinksDeleteDogs(List<DogDTO> dog);
-    public List<String> createStringLinksDeleteDogs(List<URI> uris);
+    public boolean deleteDog(int id);    
 }

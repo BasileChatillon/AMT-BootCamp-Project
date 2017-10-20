@@ -5,29 +5,20 @@
  */
 package ch.heigvd.amt.amtbootcamp.web;
 
-import ch.heigvd.amt.amtbootcamp.model.Dog;
+import ch.heigvd.amt.amtbootcamp.rest.DogCreate;
 import ch.heigvd.amt.amtbootcamp.rest.DogDelete;
 import ch.heigvd.amt.amtbootcamp.rest.dto.DogDTO;
-import ch.heigvd.amt.amtbootcamp.services.InMemoryDataStoreLocal;
-import ch.heigvd.amt.amtbootcamp.services.TestDogGenerationLocal;
-import ch.heigvd.amt.amtbootcamp.services.dao.DeleteDogLocal;
-import ch.heigvd.amt.amtbootcamp.services.dao.GetDog;
 import ch.heigvd.amt.amtbootcamp.services.dao.GetDogLocal;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 
 /**
  *
@@ -39,7 +30,7 @@ public class TestDogServlet extends HttpServlet {
     private GetDogLocal getDog;
     
     @EJB
-    private DeleteDogLocal deleteDog;
+    private DogDelete deleteDog;
         
     private final String PAGE_ATTRIBUT = "page";
     private final String ENTRY_ATTRIBUT = "entry";
@@ -69,11 +60,17 @@ public class TestDogServlet extends HttpServlet {
         }
         
         List<DogDTO> dogs = getDog.findDogsPages(defaultPageNumber, defaultDogsInPage);
+        List<URI> uris2 = new ArrayList<>();
         
-        //List<URI> uris = deleteDog.createLinksDeleteDogs(dogs);
+//        for(DogDTO dog : dogs){
+//            uris2.add(deleteDog.createLinkDeleteDog(dog));
+//        }
+        
+        String uris = deleteDog.createLinkDeleteDog(dogs.get(0)).toString();
+        //List<URI> uris2 = deleteDog.createLinksDeleteDogs(dogs);
         //List<String> urisS = deleteDog.createStringLinksDeleteDogs(uris);
-        List<String> uris = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
-        request.setAttribute("dogs", dogs);
+        //List<String> uris = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
+        //request.setAttribute("dogs", dog);
         request.setAttribute("uris", uris);
         
         request.getRequestDispatcher("/WEB-INF/pages/Dog.jsp").forward(request, response);
