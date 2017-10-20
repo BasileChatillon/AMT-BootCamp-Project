@@ -5,13 +5,14 @@
  */
 package ch.heigvd.amt.amtbootcamp.web;
 
-import ch.heigvd.amt.amtbootcamp.rest.DogDelete;
+import ch.heigvd.amt.amtbootcamp.rest.DogRessource;
 import ch.heigvd.amt.amtbootcamp.rest.dto.DogDTO;
 import ch.heigvd.amt.amtbootcamp.services.dao.GetDogLocal;
 
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -29,7 +30,7 @@ public class TestDogServlet extends HttpServlet {
     private GetDogLocal getDog;
     
     @EJB
-    private DogDelete deleteDog;
+    private DogRessource dogRessource;
         
     private final String PAGE_ATTRIBUT = "page";
     private final String ENTRY_ATTRIBUT = "entry";
@@ -71,16 +72,17 @@ public class TestDogServlet extends HttpServlet {
         List<URI> uris2 = new ArrayList<>();
         
 //        for(DogDTO dog : dogs){
-//            uris2.add(deleteDog.createLinkDeleteDog(dog));
+//            uris2.add(dogRessource.createLinkDeleteDog(dog));
 //        }
         
-        String uris = deleteDog.createLinkDeleteDog(dogs.get(0)).toString();
+        //String uris = dogRessource.createLinkDeleteDog(dogs.get(0)).toString();
         // Création des lien de suppressions des chiens
-        //List<URI> uris2 = deleteDog.createLinksDeleteDogs(dogs);
-        //List<String> urisS = deleteDog.createStringLinksDeleteDogs(uris);
-        //List<String> uris = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
-        //request.setAttribute("dogs", dog);
+        //List<URI> uris2 = dogRessource.createLinksDeleteDogs(dogs);
+        //List<String> urisS = dogRessource.createStringLinksDeleteDogs(uris);
+        List<String> uris = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
+        
         // Ajout des attributs dans la requête
+        request.setAttribute("dogs", dogs);
         request.setAttribute("uris", uris);
         
         // Forward de la requête
