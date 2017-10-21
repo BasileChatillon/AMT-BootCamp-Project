@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.heigvd.amt.amtbootcamp.rest;
+package ch.heigvd.amt.amtbootcamp.services.dao;
+
+import ch.heigvd.amt.amtbootcamp.model.Dog;
+import javax.ejb.Local;
 
 /**
  *
  * @author basilechatillon
  */
-public class DogUpdate {
-    
+@Local
+public interface UpdateDogLocal {
+    public boolean updateDog(int id, Dog dog);
 }

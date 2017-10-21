@@ -31,6 +31,7 @@ public class GetDog implements GetDogLocal{
     @Override
     public DogDTO findDog(int id) {
         DogDTO dogrequested = null;
+        
         Connection connection;
         try {
             connection = dataSource.getConnection();

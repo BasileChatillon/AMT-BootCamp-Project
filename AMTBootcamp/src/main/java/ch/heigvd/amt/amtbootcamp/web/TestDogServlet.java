@@ -12,7 +12,6 @@ import ch.heigvd.amt.amtbootcamp.services.dao.GetDogLocal;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;

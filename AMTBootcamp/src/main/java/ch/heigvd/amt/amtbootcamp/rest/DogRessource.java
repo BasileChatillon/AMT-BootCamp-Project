@@ -10,6 +10,7 @@ import ch.heigvd.amt.amtbootcamp.rest.dto.DogDTO;
 import ch.heigvd.amt.amtbootcamp.services.dao.CreateDogLocal;
 import ch.heigvd.amt.amtbootcamp.services.dao.DeleteDogLocal;
 import ch.heigvd.amt.amtbootcamp.services.dao.GetDogLocal;
+import ch.heigvd.amt.amtbootcamp.services.dao.UpdateDogLocal;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,6 +49,9 @@ public class DogRessource {
     @EJB
     GetDogLocal getDog;
     
+    @EJB
+    UpdateDogLocal updateDog;
+    
     /**
      * Permet d'ajouter un chien dans la base de donnée
      * @param dog le chien qui sera crée
@@ -56,11 +60,12 @@ public class DogRessource {
     @Path("/custom")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createResponse(Dog dog){
+    public Response createDog(Dog dog){
         
         DogDTO newDog = createDog.createDog(dog);
     
         if (newDog == null){
+            
             return Response.status(Response.Status.NOT_ACCEPTABLE)
                            .entity("Could not create")
                            .build();
@@ -70,6 +75,75 @@ public class DogRessource {
         
         return Response.created(addresse)
                        .status(Response.Status.CREATED)
+                       .build();
+    }
+    
+    /**
+     * Permet de crée des chiens de manière aléatoire
+     * @param number Le nombre de chien à générer
+     * @return Les chiens généré
+     */
+    @Path("/random/{number}")
+    @GET
+    public Response createDog(@PathParam("number") int number){
+        System.out.println("Number of dog to create " + number);
+        int nbCreated = createDog.createRandomDogs(number);
+        Response rsp;
+        
+        if(number > 0){
+            if(nbCreated == 0) {
+                rsp = Response.status(Response.Status.EXPECTATION_FAILED)
+                              .entity("Could not Create any Dogs")
+                              .build();
+            }
+            else if(nbCreated == number){
+                String tmp = "All the dogs created (" + nbCreated + ")";
+                rsp = Response.status(Response.Status.CREATED)
+                              .entity(tmp)
+                              .build();
+            }    
+            else{
+                String tmp = "Number of dog Created : " + nbCreated + "( of the " + number + " dogs requested";
+                rsp = Response.status(Response.Status.CREATED)
+                              .entity(tmp)
+                              .build();
+            }
+        }
+        else{
+            rsp = Response.status(Response.Status.CONFLICT)
+                          .entity("0 dog requested)")
+                          .build();
+        } 
+        return rsp;
+    }
+    
+    @Path("/update/{id}")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response dogUpdate(@PathParam("id") int id, Dog dog){
+        
+        // Si le chien n'existe pas dans la db on retourne not foud
+        if(getDog.findDog(id) == null){
+            System.err.println("Le chien est inconnu");
+            return Response.status(Response.Status.BAD_GATEWAY)
+                           .entity("Could not find dog")
+                           .build();
+        }
+        
+        // Si il y a eu une erreur lors de la mise à jour
+        if(!updateDog.updateDog(id, dog)){
+            System.err.println("Le chien ne s'est pas ajouté");
+            return Response.status(Response.Status.NOT_MODIFIED)
+                           .entity("Could not update dog")
+                           .build();
+        }
+        
+        System.out.println("Le chien a bien été ajouté");
+        
+        URI addresse = createLinkGet(id);
+        
+        return Response.created(addresse)
+                       .status(Response.Status.ACCEPTED)
                        .build();
     }
     

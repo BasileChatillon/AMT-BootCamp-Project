@@ -7,12 +7,13 @@ package ch.heigvd.amt.amtbootcamp.services.dao;
 
 import ch.heigvd.amt.amtbootcamp.model.Dog;
 import ch.heigvd.amt.amtbootcamp.rest.dto.DogDTO;
-import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author basilechatillon
  */
+@Local
 public interface CreateDogLocal {
     /**
      * Méthode permettant de créé un chien et de l'ajouter dans la base de donnée
@@ -26,6 +27,6 @@ public interface CreateDogLocal {
      * @param number Le nombre de chien 
      * @return retourne la liste de chien créé avec leur ID;
      */
-    public List<DogDTO> createRandomDogs(int number);
+    public int createRandomDogs(int number);
     
 }
