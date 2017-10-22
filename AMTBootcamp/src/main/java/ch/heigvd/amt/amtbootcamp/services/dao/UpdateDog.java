@@ -29,7 +29,7 @@ public class UpdateDog implements UpdateDogLocal {
     public boolean updateDog(int id, Dog dog) {
         int i = 0;
         Connection connection;
-        
+
         try {
             connection = dataSource.getConnection();
             System.out.println("Schema : " + connection.getSchema());
@@ -37,7 +37,7 @@ public class UpdateDog implements UpdateDogLocal {
 
             String query = "UPDATE dog SET dog_name = ?, dog_age = ?, dog_weight = ?, dog_quote = ? WHERE dog_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
-            
+
             pstmt.setString(1, dog.getName());
             pstmt.setInt(2, dog.getAge());
             pstmt.setDouble(3, dog.getWeight());
@@ -50,7 +50,7 @@ public class UpdateDog implements UpdateDogLocal {
         } catch (SQLException ex) {
             Logger.getLogger(UpdateDog.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return (i > 0);
     }
 

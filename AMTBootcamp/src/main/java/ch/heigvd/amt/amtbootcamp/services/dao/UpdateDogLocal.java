@@ -14,5 +14,6 @@ import javax.ejb.Local;
  */
 @Local
 public interface UpdateDogLocal {
+
     public boolean updateDog(int id, Dog dog);
 }

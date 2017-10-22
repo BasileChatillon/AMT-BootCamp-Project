@@ -17,10 +17,10 @@ import javax.ejb.Singleton;
  * @author basilechatillon
  */
 @Singleton
-public class InMemoryDataStore implements InMemoryDataStoreLocal{
-        
+public class InMemoryDataStore implements InMemoryDataStoreLocal {
+
     private long dogIdCounter = 0;
-    
+
     private final Map<Long, Dog> dogs = new HashMap<>();
 
     @Override
@@ -37,6 +37,6 @@ public class InMemoryDataStore implements InMemoryDataStoreLocal{
 
     @Override
     public List<Dog> findAllDogs() {
-         return new ArrayList<>(dogs.values());
+        return new ArrayList<>(dogs.values());
     }
 }

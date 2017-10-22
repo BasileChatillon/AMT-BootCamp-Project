@@ -10,13 +10,15 @@ package ch.heigvd.amt.amtbootcamp.model;
  * @author basilechatillon
  */
 public class Dog {
+
     private String name;
     private int age;
     private double weight;
     private String quote;
 
-    public Dog() {}
-    
+    public Dog() {
+    }
+
     public Dog(String name, int age, double weight, String quote) {
         this.name = name;
         this.age = age;
@@ -55,11 +57,10 @@ public class Dog {
     public void setQuote(String quote) {
         this.quote = quote;
     }
-    
+
     @Override
     public String toString() {
-        return "Dog : " + name + ", age: " + age + ", weight : " + weight + 
-                "is saying " + quote;
+        return "Dog : " + name + ", age: " + age + ", weight : " + weight
+                + "is saying " + quote;
     }
 }
-

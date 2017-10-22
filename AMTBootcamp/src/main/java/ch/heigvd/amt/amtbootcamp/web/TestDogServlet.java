@@ -27,21 +27,21 @@ public class TestDogServlet extends HttpServlet {
 
     @EJB
     private GetDogLocal getDog;
-    
+
     @EJB
     private DogRessource dogRessource;
-        
+
     private final String PAGE_ATTRIBUT = "page";
     private final String ENTRY_ATTRIBUT = "entry";
 
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * Permet de trouver les chiens à afficher en fonction de la page et du nombre
-     * de chien par page.
-     * Génére églaement les liens de suppression des chiens
-     * Forward ces deux choses à la JSP qui affichera le toute dans un tableau
-     * 
+     * Permet de trouver les chiens à afficher en fonction de la page et du
+     * nombre de chien par page. Génére églaement les liens de suppression des
+     * chiens Forward ces deux choses à la JSP qui affichera le toute dans un
+     * tableau
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -53,38 +53,36 @@ public class TestDogServlet extends HttpServlet {
         // gestion des paraètres : on commence par les récupérer
         String pageParam = request.getParameter(PAGE_ATTRIBUT);
         String dogsInPageParam = request.getParameter(ENTRY_ATTRIBUT);
-        
+
         // gestion des paraètres : valeur par défaut des param
         int defaultPageNumber = 0;
         int defaultDogsInPage = 10;
-        
+
         // gestion des paraètres : On tente de récupéré la valeur des param
         if (pageParam != null && !pageParam.isEmpty()) {
-          defaultPageNumber = Integer.parseInt(request.getParameter(PAGE_ATTRIBUT)) - 1;
+            defaultPageNumber = Integer.parseInt(request.getParameter(PAGE_ATTRIBUT)) - 1;
         }
         if (dogsInPageParam != null && !dogsInPageParam.isEmpty()) {
-          defaultDogsInPage = Integer.parseInt(request.getParameter(ENTRY_ATTRIBUT));
+            defaultDogsInPage = Integer.parseInt(request.getParameter(ENTRY_ATTRIBUT));
         }
-        
+
         // Recherche des chiens à afficher en fonctions des param
         List<DogDTO> dogs = getDog.findDogsPages(defaultPageNumber, defaultDogsInPage);
         List<URI> uris2 = new ArrayList<>();
-        
+
 //        for(DogDTO dog : dogs){
 //            uris2.add(dogRessource.createLinkDeleteDog(dog));
 //        }
-        
         //String uris = dogRessource.createLinkDeleteDog(dogs.get(0)).toString();
-        
 // Création des lien de suppressions des chiens
         List<URI> uris = dogRessource.createLinksDelete(dogs);
         List<String> urisS = dogRessource.createStringLinks(uris);
         //List<String> uris = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
-        
+
         // Ajout des attributs dans la requête
         request.setAttribute("dogs", dogs);
         request.setAttribute("uris", urisS);
-        
+
         // Forward de la requête
         request.getRequestDispatcher("/WEB-INF/pages/Dog.jsp").forward(request, response);
     }

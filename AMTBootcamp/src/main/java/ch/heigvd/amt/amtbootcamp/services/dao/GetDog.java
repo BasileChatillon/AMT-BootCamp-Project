@@ -23,40 +23,40 @@ import javax.sql.DataSource;
  * @author basilechatillon
  */
 @Stateless
-public class GetDog implements GetDogLocal{
+public class GetDog implements GetDogLocal {
 
     @Resource(lookup = "java:/jdbc/dogdb")
     private DataSource dataSource;
-    
+
     @Override
     public DogDTO findDog(int id) {
         DogDTO dogrequested = null;
-        
+
         Connection connection;
         try {
             connection = dataSource.getConnection();
             System.out.println("Schema : " + connection.getSchema());
             System.out.println("Catalog : " + connection.getCatalog());
-            
+
             String query = "SELECT * FROM dog WHERE dog_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, id);
-            
+
             ResultSet rs = pstmt.executeQuery();
-            
+
             if (rs.next()) {
-                String name= rs.getString("dog_name");
+                String name = rs.getString("dog_name");
                 int age = rs.getInt("dog_age");
                 double weight = rs.getDouble("dog_weight");
                 String quote = rs.getString("dog_quote");
                 dogrequested = new DogDTO(id, name, age, weight, quote);
             }
-            
+
             connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(GetDog.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return dogrequested;
     }
 
@@ -68,19 +68,19 @@ public class GetDog implements GetDogLocal{
     @Override
     public List<DogDTO> findAllDogs() {
         List<DogDTO> dogs = new ArrayList<>();
-        
+
         Connection connection;
         try {
             connection = dataSource.getConnection();
             System.out.println("Schema : " + connection.getSchema());
             System.out.println("Catalog : " + connection.getCatalog());
-            
+
             String query = "SELECT * FROM dog";
             PreparedStatement pstmt = connection.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("dog_id");
-                String name= rs.getString("dog_name");
+                String name = rs.getString("dog_name");
                 int age = rs.getInt("dog_age");
                 double weight = rs.getDouble("dog_weight");
                 String quote = rs.getString("dog_quote");
@@ -90,7 +90,7 @@ public class GetDog implements GetDogLocal{
         } catch (SQLException ex) {
             Logger.getLogger(GetDog.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return dogs;
     }
 
@@ -102,42 +102,42 @@ public class GetDog implements GetDogLocal{
             connection = dataSource.getConnection();
             System.out.println("Schema : " + connection.getSchema());
             System.out.println("Catalog : " + connection.getCatalog());
-            
+
             String query = "SELECT COUNT(*) FROM dog";
             PreparedStatement pstmt = connection.prepareStatement(query);
-            
+
             ResultSet rs = pstmt.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 nbDog = rs.getInt(1);
             }
-            
+
             connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(GetDog.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return nbDog;
     }
 
     @Override
     public List<DogDTO> findDogsPages(int page, int nbDogInPage) {
         List<DogDTO> dogs = new ArrayList<>();
-        
+
         Connection connection;
         try {
             connection = dataSource.getConnection();
             System.out.println("Schema : " + connection.getSchema());
             System.out.println("Catalog : " + connection.getCatalog());
-            
+
             String query = "SELECT * FROM dog LIMIT ? OFFSET ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, nbDogInPage);
             pstmt.setInt(2, nbDogInPage * page);
             ResultSet rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("dog_id");
-                String name= rs.getString("dog_name");
+                String name = rs.getString("dog_name");
                 int age = rs.getInt("dog_age");
                 double weight = rs.getDouble("dog_weight");
                 String quote = rs.getString("dog_quote");
@@ -147,8 +147,8 @@ public class GetDog implements GetDogLocal{
         } catch (SQLException ex) {
             Logger.getLogger(GetDog.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return dogs;
     }
-    
+
 }

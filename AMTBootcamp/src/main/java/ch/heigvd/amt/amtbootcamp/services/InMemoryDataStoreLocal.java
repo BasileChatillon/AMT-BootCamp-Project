@@ -15,8 +15,10 @@ import javax.ejb.Local;
  */
 @Local
 public interface InMemoryDataStoreLocal {
+
     public long saveDog(Dog dog);
+
     public Dog loadDog(long Id);
-    
+
     public List<Dog> findAllDogs();
 }
