@@ -12,6 +12,14 @@
         <title>Create a new Dog</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form method="post">
+            Enter the informations of the new dog to create !
+            <br> Name of the dog : <input type="text" name="name" required><br>
+            <br> Age of the dog : <input type="number" name="age" required><br>
+            <br> Weight of the dog : <input type="number" step="0.1" name="weight" required><br>
+            <br> Quote of the dog : <input type="text" name="quote" required><br>
+
+            <input type="submit" value="Submit">
+        </form> 
     </body>
 </html>

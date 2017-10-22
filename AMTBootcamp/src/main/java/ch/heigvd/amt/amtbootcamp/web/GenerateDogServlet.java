@@ -9,8 +9,6 @@ import ch.heigvd.amt.amtbootcamp.rest.DogRessource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,28 +51,25 @@ public class GenerateDogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String nbDogToGenerate = request.getParameter("nbtogenerate");
 
-
-        
         int defaultNumberDog = 0;
         if (nbDogToGenerate != null && !nbDogToGenerate.isEmpty()) {
             defaultNumberDog = Integer.parseInt(request.getParameter("nbtogenerate"));
         }
-        
-        if(defaultNumberDog > 123456){
+
+        if (defaultNumberDog > 123456) {
             defaultNumberDog = 123456;
         }
-        
+
         URI link = dogRessource.createLinkCreateRandom(defaultNumberDog);
         InputStream rsp = link.toURL().openStream();
-        
-        
+
         // Forward de la requête
         response.sendRedirect("http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog");
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *

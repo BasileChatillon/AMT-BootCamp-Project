@@ -14,7 +14,7 @@
     <body>
         <form method="post">
             Number of dog to generate:
-            <br><input type="number" name="nbtogenerate"value="1"><br>
+            <br><input type="number" name="nbtogenerate" value="1"><br>
 
             <input type="submit" value="Submit">
         </form> 

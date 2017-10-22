@@ -65,6 +65,8 @@ public class DogRessource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createDog(Dog dog) {
 
+        System.out.println("Creating a new Dog");
+        
         DogDTO newDog = createDog.createDog(dog);
 
         if (newDog == null) {
@@ -122,6 +124,7 @@ public class DogRessource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response dogUpdate(@PathParam("id") int id, Dog dog) {
+        System.out.println("Updating a Dog");
 
         // Si le chien n'existe pas dans la db on retourne not foud
         if (getDog.findDog(id) == null) {
@@ -158,6 +161,7 @@ public class DogRessource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public DogDTO dogGet(@PathParam("id") int id) {
+        System.out.println("Getting a Dog");
         return getDog.findDog(id);
     }
 
@@ -172,6 +176,8 @@ public class DogRessource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public DogDTO dogDelete(@PathParam("id") int id) {
+        System.out.println("Deleting a Dog");
+        
         DogDTO dogToDelete = getDog.findDog(id);
 
         if (deleteDog.deleteDog(id)) {
@@ -216,6 +222,18 @@ public class DogRessource {
                 .path(DogRessource.class)
                 .path(DogRessource.class, "dogCreateRandom")
                 .build(number);
+    }
+    
+    /**
+     * Génère l?URI pour créer un chien
+     * 
+     * @return 
+     */
+    public URI createLinkCustom() {
+        return UriBuilder.fromPath(pathDocker)
+                .path(DogRessource.class)
+                .path(DogRessource.class, "createDog")
+                .build();
     }
 
     /**
