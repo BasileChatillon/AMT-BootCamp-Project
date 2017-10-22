@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>TestDogServlet</servlet-name>
-        <servlet-class>ch.heigvd.amt.amtbootcamp.web.TestDogServlet</servlet-class>
+        <servlet-name>DisplayDogServlet</servlet-name>
+        <servlet-class>ch.heigvd.amt.amtbootcamp.web.DisplayDogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateDogServlet</servlet-name>
+        <servlet-class>ch.heigvd.amt.amtbootcamp.web.UpdateDogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GenerateDogServlet</servlet-name>
+        <servlet-class>ch.heigvd.amt.amtbootcamp.web.GenerateDogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateDogServlet</servlet-name>
+        <servlet-class>ch.heigvd.amt.amtbootcamp.web.CreateDogServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>TestDogServlet</servlet-name>
+        <servlet-name>DisplayDogServlet</servlet-name>
         <url-pattern>/dog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDogServlet</servlet-name>
+        <url-pattern>/dog/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GenerateDogServlet</servlet-name>
+        <url-pattern>/dog/generate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateDogServlet</servlet-name>
+        <url-pattern>/dog/create</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

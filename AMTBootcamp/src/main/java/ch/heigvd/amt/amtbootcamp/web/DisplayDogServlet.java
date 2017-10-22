@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author basilechatillon
  */
-public class TestDogServlet extends HttpServlet {
+public class DisplayDogServlet extends HttpServlet {
 
     @EJB
     private GetDogLocal getDog;
@@ -68,23 +68,17 @@ public class TestDogServlet extends HttpServlet {
 
         // Recherche des chiens à afficher en fonctions des param
         List<DogDTO> dogs = getDog.findDogsPages(defaultPageNumber, defaultDogsInPage);
-        List<URI> uris2 = new ArrayList<>();
 
-//        for(DogDTO dog : dogs){
-//            uris2.add(dogRessource.createLinkDeleteDog(dog));
-//        }
-        //String uris = dogRessource.createLinkDeleteDog(dogs.get(0)).toString();
-// Création des lien de suppressions des chiens
+        // Création des lien de suppressions des chiens
         List<URI> uris = dogRessource.createLinksDelete(dogs);
         List<String> urisS = dogRessource.createStringLinks(uris);
-        //List<String> uris = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
 
         // Ajout des attributs dans la requête
         request.setAttribute("dogs", dogs);
         request.setAttribute("uris", urisS);
 
         // Forward de la requête
-        request.getRequestDispatcher("/WEB-INF/pages/Dog.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/DogDisplay.jsp").forward(request, response);
     }
 
     /**
@@ -94,7 +88,7 @@ public class TestDogServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Display givens dogs from the db.";
     }// </editor-fold>
 
 }

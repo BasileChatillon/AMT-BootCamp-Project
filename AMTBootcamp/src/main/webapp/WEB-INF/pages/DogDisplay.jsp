@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Dog
+    Document   : DogDisplay
     Created on : 13 oct. 2017, 11:27:56
     Author     : basilechatillon
 --%>
