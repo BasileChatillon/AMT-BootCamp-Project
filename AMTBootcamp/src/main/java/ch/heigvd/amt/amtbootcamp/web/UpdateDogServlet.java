@@ -30,7 +30,7 @@ public class UpdateDogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Forward de la requête
-        request.getRequestDispatcher("/WEB-INF/pages/DogCreate.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/DogUpdate.jsp").forward(request, response);
     }
 
     /**

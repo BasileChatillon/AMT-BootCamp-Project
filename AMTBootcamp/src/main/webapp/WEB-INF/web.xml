@@ -16,6 +16,10 @@
         <servlet-name>CreateDogServlet</servlet-name>
         <servlet-class>ch.heigvd.amt.amtbootcamp.web.CreateDogServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteDogServlet</servlet-name>
+        <servlet-class>ch.heigvd.amt.amtbootcamp.web.DeleteDogServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DisplayDogServlet</servlet-name>
         <url-pattern>/dog</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>CreateDogServlet</servlet-name>
         <url-pattern>/dog/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDogServlet</servlet-name>
+        <url-pattern>/dog/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

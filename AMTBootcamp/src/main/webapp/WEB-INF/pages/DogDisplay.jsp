@@ -34,7 +34,7 @@
                     <td>${dog.age}</td>
                     <td>${dog.weight}</td>
                     <td>${dog.quote}</td>
-                    <td><a href="${requestScope.uris[status.index]}" > Tuer le chien </a></td>
+                    <td><a href="${requestScope.uris[status.index]}" onclick="return confirm('Do you really want to kill a puppy?? :(')"> Tuer le chien </a></td>
                 </tr>
             </c:forEach>
         </table>

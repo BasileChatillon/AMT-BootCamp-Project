@@ -89,7 +89,7 @@ public class DogRessource {
      */
     @Path("/random/{number}")
     @GET
-    public Response createDog(@PathParam("number") int number) {
+    public Response dogCreateRandom(@PathParam("number") int number) {
         System.out.println("Number of dog to create " + number);
         int nbCreated = createDog.createRandomDogs(number);
         Response rsp;
@@ -203,6 +203,19 @@ public class DogRessource {
                 .path(DogRessource.class)
                 .path(DogRessource.class, "dogGet")
                 .build(ID);
+    }
+    
+    /**
+     * Permet de créer l'URL pour créer des chien àléatoire
+     *
+     * @param number  Le nombre de chien a creer
+     * @return L'URI
+     */
+    public URI createLinkCreateRandom(int number) {
+        return UriBuilder.fromPath(pathDocker)
+                .path(DogRessource.class)
+                .path(DogRessource.class, "dogCreateRandom")
+                .build(number);
     }
 
     /**
