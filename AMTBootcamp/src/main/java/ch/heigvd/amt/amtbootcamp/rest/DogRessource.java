@@ -219,6 +219,20 @@ public class DogRessource {
     }
 
     /**
+     * Permet de créer le lien de suppression d'une ID de chien
+     *
+     * @param id Le chien qui va permettre la création de l'ID
+     * @return l'URI destiné à la suppresion du chien
+     */
+    public URI createLinkDelete(int id) {
+        // Crée l'url pour pouvoir supprimer le chien
+        return UriBuilder.fromPath(pathDocker)
+                .path(DogRessource.class)
+                .path(DogRessource.class, "dogDelete")
+                .build(id);
+    }
+    
+    /**
      * Permet de créer le lien de suppression d'un chien
      *
      * @param dog Le chien qui va permettre la création de l'ID
@@ -226,10 +240,7 @@ public class DogRessource {
      */
     public URI createLinkDelete(DogDTO dog) {
         // Crée l'url pour pouvoir supprimer le chien
-        return UriBuilder.fromPath(pathDocker)
-                .path(DogRessource.class)
-                .path(DogRessource.class, "dogDelete")
-                .build(dog.getID());
+        return createLinkDelete(dog.getID());
     }
 
     /**

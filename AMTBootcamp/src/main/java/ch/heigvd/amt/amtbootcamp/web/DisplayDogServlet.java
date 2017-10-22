@@ -11,7 +11,6 @@ import ch.heigvd.amt.amtbootcamp.services.dao.GetDogLocal;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -30,6 +29,8 @@ public class DisplayDogServlet extends HttpServlet {
 
     @EJB
     private DogRessource dogRessource;
+    
+    private DeleteDogServlet deleteServlet = new DeleteDogServlet();
 
     private final String PAGE_ATTRIBUT = "page";
     private final String ENTRY_ATTRIBUT = "entry";
@@ -70,7 +71,8 @@ public class DisplayDogServlet extends HttpServlet {
         List<DogDTO> dogs = getDog.findDogsPages(defaultPageNumber, defaultDogsInPage);
 
         // Création des lien de suppressions des chiens
-        List<URI> uris = dogRessource.createLinksDelete(dogs);
+        //List<URI> uris = dogRessource.createLinksDelete(dogs);
+        List<URI> uris = deleteServlet.createLinksDeleteServlet(dogs);
         List<String> urisS = dogRessource.createStringLinks(uris);
 
         // Ajout des attributs dans la requête
