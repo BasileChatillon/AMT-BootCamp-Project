@@ -20,7 +20,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/">Hello Dogs!</a>
+                    <a class="navbar-brand" href="https://www.nzhuntingandshooting.co.nz/attachments/f68/37001d1432844124-photos-your-dog-branch-manager.jpg">Hello Dogs!</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/">Home</a></li>
