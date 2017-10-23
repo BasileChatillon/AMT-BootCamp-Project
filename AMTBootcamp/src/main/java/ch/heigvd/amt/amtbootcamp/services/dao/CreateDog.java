@@ -97,7 +97,6 @@ public class CreateDog implements CreateDogLocal {
             System.out.println("ch.heigvd.amt.amtbootcamp.services.dao.CreateDog.createRandomDogs():: nbTo iter " + nbToIter + ".");
 
             for (int i = 0; i < nbToIter; ++i) {
-                System.out.println("ch.heigvd.amt.amtbootcamp.services.dao.CreateDog.createRandomDogs():: first " + batchSize + " added.");
                 dogsGenerated = randomDogGeneration.generateDog(batchSize);
 
                 for (Dog dog : dogsGenerated) {

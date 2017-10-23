@@ -36,6 +36,8 @@ import javax.ws.rs.core.UriInfo;
 @Path("/dog")
 public class DogRessource {
 
+    private final int maxNameLength = 45;
+    private final int maxQuoteLegth = 200;
     private final String pathDocker = "http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/api/";
 
     @Context
@@ -67,7 +69,16 @@ public class DogRessource {
 
         System.out.println("Creating a new Dog");
 
+        if(dog.getName().length() > maxNameLength){
+            dog.setName(dog.getName().substring(maxNameLength));
+        }
+        
+        if(dog.getQuote().length() > maxQuoteLegth){
+            dog.setQuote(dog.getQuote().substring(maxQuoteLegth));
+        }
+        
         DogDTO newDog = createDog.createDog(dog);
+        
 
         if (newDog == null) {
 
@@ -124,6 +135,14 @@ public class DogRessource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response dogUpdate(@PathParam("id") int id, Dog dog) {
+        if(dog.getName().length() > maxNameLength){
+            dog.setName(dog.getName().substring(maxNameLength));
+        }
+        
+        if(dog.getQuote().length() > maxQuoteLegth){
+            dog.setQuote(dog.getQuote().substring(maxQuoteLegth));
+        }
+        
         System.out.println("Updating a Dog");
 
         // Si le chien n'existe pas dans la db on retourne not foud

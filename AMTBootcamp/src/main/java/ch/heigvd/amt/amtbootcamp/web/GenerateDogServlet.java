@@ -59,8 +59,8 @@ public class GenerateDogServlet extends HttpServlet {
             defaultNumberDog = Integer.parseInt(request.getParameter("nbtogenerate"));
         }
 
-        if (defaultNumberDog > 123456) {
-            defaultNumberDog = 123456;
+        if (defaultNumberDog > 1234567) {
+            defaultNumberDog = 1234567;
         }
 
         URI link = dogRessource.createLinkCreateRandom(defaultNumberDog);
