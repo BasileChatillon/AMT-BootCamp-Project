@@ -9,18 +9,47 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update a Dog</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>chien modification</title>
     </head>
     <body>
-        <form method="post">
-            Enter the dog's attributs that you want to update! (The one you do not touch will stay the same)
-            <br> Name of the dog : <input type="text" name="name" value=${requestScope.dogToModify.name}><br>
-            <br> Age of the dog : <input type="number" name="age" value=${requestScope.dogToModify.age}><br>
-            <br> Weight of the dog : <input type="number" step="0.1" name="weight" value=${requestScope.dogToModify.weight}><br>
-            <br> Quote of the dog : <input type="text" name="quote" value=${requestScope.dogToModify.quote}><br>
-            <br><input type="hidden" name="id" value=${requestScope.dogToModify.ID}><br>
-
-            <input type="submit" value="Submit">
-        </form> 
+        <div class="container">
+            <h2>Modifier le chien!</h2>
+            <form class="form-horizontal" method="post">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Nouveau nom :</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" value="${requestScope.dogToModify.name}" class="form-control" id="email" placeholder="Enter name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Nouvel age:</label>
+                    <div class="col-sm-10">
+                        <input type="number" name="age" min="1" max="30" value="${requestScope.dogToModify.age}" class="form-control" id="email" placeholder="Enter age" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Nouveau oids:</label>
+                    <div class="col-sm-10">
+                        <input type="number" step="0.1" name="weight" min="0.1" value="${requestScope.dogToModify.weight}" class="form-control" id="email" placeholder="Enter weight" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Quote:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="quote" value="${requestScope.dogToModify.quote}" class="form-control" id="email" placeholder="Enter quote" required>
+                    </div>
+                </div>
+                <div class="form-group">        
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" value="Submit" class="btn btn-default">Modifier le chien</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </body>
 </html>

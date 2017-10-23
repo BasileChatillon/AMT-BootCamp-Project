@@ -11,12 +11,10 @@
     <style>
         table, th, td {
             border-spacing: 15px;
-            width:100%;
             padding: 5px;
         }
         table {
-            border: 1px solid black;
-            border-collapse: collapse;
+            width:100%;
         }
 
         table#tabledisplaydog{
@@ -46,21 +44,21 @@
         <h1>Hello Doges!</h1>
         <table>
             <tr>
-                <td text="right" colspan="2">générer des chiens aléatoires <a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/generate">x</a></td>
+                <td align="right" colspan="2">Générer des chiens aléatoires <a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/generate">x</a></td>
             </tr>
             <tr>
-                <td text="right" colspan="2">Créer un chien <a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/create">x</a></td>
+                <td align="right" colspan="2">Créer un chien <a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/create">x</a></td>
             </tr>
             <tr>
                 <td colspan="2">
                     <table id="tabledisplaydog">
                         <tr>
-                            <th>Nom du Chien</th>
-                            <th>Age du Chien</th>
-                            <th>Poids du Chien</th>
-                            <th>Le Chien dit :</th>
-                            <th>Pour tuer le chien</th>
-                            <th>Pour modifier le chien
+                            <th>Nom</th>
+                            <th>Age</th>
+                            <th>Poids</th>
+                            <th>Le Chien dit</th>
+                            <th>Tuer le chien</th>
+                            <th>Modifier le chien</th>
                         </tr>
                         <c:forEach var="dog" items="${requestScope.dogs}" varStatus="status"> 
                             <tr>
@@ -68,8 +66,12 @@
                                 <td>${dog.age}</td>
                                 <td>${dog.weight}</td>
                                 <td>${dog.quote}</td>
-                                <td><a href=${requestScope.urisDelete[status.index]} onclick="return confirm('Do you really want to kill a puppy?? :(')"> Tuer le chien </a></td>
-                                <td><a href=${requestScope.urisUpdate[status.index]} > modifier </a></td>
+                                <td align="middle" >
+                                    <a href=${requestScope.urisDelete[status.index]} onclick="return confirm('Do you really want to kill a puppy?? :(')"> Tuer le chien </a>
+                                </td>
+                                <td align="middle">
+                                    <a href=${requestScope.urisUpdate[status.index]} > modifier </a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </table>

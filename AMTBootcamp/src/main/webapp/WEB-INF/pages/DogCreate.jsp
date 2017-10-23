@@ -9,17 +9,50 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create a new Dog</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>chien creation</title>
+
     </head>
     <body>
-        <form method="post">
-            Enter the informations of the new dog to create !
-            <br> Name of the dog : <input type="text" name="name" required><br>
-            <br> Age of the dog : <input type="number" name="age" required><br>
-            <br> Weight of the dog : <input type="number" step="0.1" name="weight" required><br>
-            <br> Quote of the dog : <input type="text" name="quote" required><br>
-
-            <input type="submit" value="Submit">
-        </form> 
+        <div class="container">
+            <h2>Créer un chien!</h2>
+            <form class="form-horizontal" method="post">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Nom</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" class="form-control" id="email" placeholder="Enter name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Age:</label>
+                    <div class="col-sm-10">
+                        <input input type="number" name="age" min="1" max="30" class="form-control" id="email" placeholder="Enter age" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Poids:</label>
+                    <div class="col-sm-10">
+                        <input type="number" step="0.1" name="weight" min="0.1" class="form-control" id="email" placeholder="Enter weight" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Quote:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="quote" class="form-control" id="email" placeholder="Enter quote" required>
+                    </div>
+                </div>
+                <div class="form-group">        
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" value="Submit" class="btn btn-default">Créer le chien</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </body>
 </html>
+
+
