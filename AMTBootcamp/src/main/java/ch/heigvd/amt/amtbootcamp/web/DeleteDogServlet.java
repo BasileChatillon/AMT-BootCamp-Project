@@ -51,18 +51,11 @@ public class DeleteDogServlet extends HttpServlet {
 
         String linkReturn;
 
-        // gestion des paraètres : On tente de récupéré la valeur des param
-        if (pageParam != null && !pageParam.isEmpty() && dogsInPageParam != null && !dogsInPageParam.isEmpty()) {
-            System.out.println("ch.heigvd.amt.amtbootcamp.web.DeleteDogServlet.doGet() : page - " + Integer.parseInt(pageParam));
-            System.out.println("ch.heigvd.amt.amtbootcamp.web.DeleteDogServlet.doGet() : entry - " + Integer.parseInt(dogsInPageParam));
-
-            URI linkReturn2 = createLink.ServletDisplayPage(Integer.parseInt(pageParam), Integer.parseInt(dogsInPageParam));
-            linkReturn = linkReturn2.toString();
-
-            System.out.println("ch.heigvd.amt.amtbootcamp.web.DeleteDogServlet.doGet() : link - " + linkReturn);
-        } else {
+        // gestion des paraètres pour la gestion des pages
+        if (pageParam != null && !pageParam.isEmpty() && dogsInPageParam != null && !dogsInPageParam.isEmpty())
+            linkReturn = createLink.ServletDisplayPage(Integer.parseInt(pageParam), Integer.parseInt(dogsInPageParam)).toString();
+        else
             linkReturn = createLink.getServletDisplayPath();
-        }
 
         System.out.println("ch.heigvd.amt.amtbootcamp.web.DeleteDogServlet.doGet()" + linkReturn);
 

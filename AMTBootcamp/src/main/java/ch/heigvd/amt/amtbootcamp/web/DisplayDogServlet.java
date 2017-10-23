@@ -61,12 +61,10 @@ public class DisplayDogServlet extends HttpServlet {
         int defaultDogsInPage = 10;
 
         // gestion des paraètres : On tente de récupéré la valeur des param
-        if (pageParam != null && !pageParam.isEmpty()) {
+        if (pageParam != null && !pageParam.isEmpty())
             defaultPageNumber = Integer.parseInt(pageParam);
-        }
-        if (dogsInPageParam != null && !dogsInPageParam.isEmpty()) {
+        if (dogsInPageParam != null && !dogsInPageParam.isEmpty())
             defaultDogsInPage = Integer.parseInt(dogsInPageParam);
-        }
 
         System.out.println(defaultPageNumber);
         System.out.println(defaultDogsInPage);
@@ -88,7 +86,7 @@ public class DisplayDogServlet extends HttpServlet {
         List<URI> urisDelete = createLink.ServletDelete(dogs, defaultPageNumber, defaultDogsInPage);
         List<String> urisDeleteS = createLink.createStringLinks(urisDelete);
 
-        List<URI> urisUpdate = createLink.ServletUpdate(dogs);
+        List<URI> urisUpdate = createLink.ServletUpdate(dogs, defaultPageNumber, defaultDogsInPage);
         List<String> urisUpdateS = createLink.createStringLinks(urisUpdate);
 
         List<URI> urisEntries = createLink.ServletDisplayPage(defaultPageNumber, entriesValues);

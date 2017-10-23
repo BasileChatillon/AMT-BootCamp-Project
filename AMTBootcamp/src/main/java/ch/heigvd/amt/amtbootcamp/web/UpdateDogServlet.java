@@ -32,6 +32,8 @@ public class UpdateDogServlet extends HttpServlet {
     private final String ATTRIBUT_WEIGHT = "weight";
     private final String ATTRIBUT_QUOTE = "quote";
     private final String ATTRIBUT_ID = "id";
+    private final String ATTRIBUT_PAGE = "page";
+    private final String ATTRIBUT_ENTRY = "entry";
 
     @EJB
     DogRessource dogRessource;
@@ -59,6 +61,17 @@ public class UpdateDogServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String dogIdDelete = request.getParameter(ATTRIBUT_ID);
+        String pageParam = request.getParameter(ATTRIBUT_PAGE);
+        String dogsInPageParam = request.getParameter(ATTRIBUT_ENTRY);
+
+        // gestion des paraètres : On tente de récupéré la valeur des param
+        if (pageParam != null && !pageParam.isEmpty()) {
+            request.setAttribute(ATTRIBUT_PAGE, Integer.parseInt(pageParam));
+        }
+
+        if (dogsInPageParam != null && !dogsInPageParam.isEmpty()) {
+            request.setAttribute(ATTRIBUT_ENTRY, Integer.parseInt(dogsInPageParam));
+        }
 
         if (dogIdDelete != null && !dogIdDelete.isEmpty()) {
             int id = Integer.parseInt(dogIdDelete);
@@ -81,21 +94,35 @@ public class UpdateDogServlet extends HttpServlet {
         String ageCheck = request.getParameter(ATTRIBUT_AGE);
         String weightCheck = request.getParameter(ATTRIBUT_WEIGHT);
         String quoteCheck = request.getParameter(ATTRIBUT_QUOTE);
+        String pageParam = request.getParameter(ATTRIBUT_PAGE);
+        String dogsInPageParam = request.getParameter(ATTRIBUT_ENTRY);
 
         System.out.println(nameCheck);
         System.out.println(ageCheck);
         System.out.println(weightCheck);
         System.out.println(quoteCheck);
 
+        
+                
+        // gestion des paraètres pour la gestion des pages
+        String linkReturn;
+        if (pageParam != null && !pageParam.isEmpty() && dogsInPageParam != null && !dogsInPageParam.isEmpty())
+            linkReturn = createLink.ServletDisplayPage(Integer.parseInt(pageParam), Integer.parseInt(dogsInPageParam)).toString();
+        else
+            linkReturn = createLink.getServletDisplayPath();
+        
         // gestion des paraètres : On tente de récupéré la valeur des param
         if (idCheck == null || idCheck.isEmpty()
                 || nameCheck == null || nameCheck.isEmpty()
                 || ageCheck == null || ageCheck.isEmpty()
                 || weightCheck == null || weightCheck.isEmpty()
                 || quoteCheck == null || quoteCheck.isEmpty()) {
-            response.sendRedirect(createLink.getServletDisplayPath());
+            response.sendRedirect(linkReturn);
             return;
         }
+        
+
+        
 
         URL link = createLink.APIUpdate(Integer.parseInt(idCheck)).toURL();
 
@@ -123,7 +150,7 @@ public class UpdateDogServlet extends HttpServlet {
         con.disconnect();
 
         // Forward de la requête
-        response.sendRedirect(createLink.getServletDisplayPath());
+        response.sendRedirect(linkReturn);
     }
 
     /**

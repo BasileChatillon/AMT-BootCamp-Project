@@ -49,7 +49,7 @@ public interface CreateLinkLocal {
     public URI ServletDisplayPage(int pageNumber, int entry);
     public List<URI> ServletDisplayPage(int pageNumber, List<Integer> entries);
     
-    public URI ServletUpdate(int ID);
-    public URI ServletUpdate(DogDTO dog);
-    public List<URI> ServletUpdate(List<DogDTO> dogs);
+    public URI ServletUpdate(int id, int page, int entry);
+    public URI ServletUpdate(DogDTO dog, int page, int entry);
+    public List<URI> ServletUpdate(List<DogDTO> dogs, int page, int entry);
 }

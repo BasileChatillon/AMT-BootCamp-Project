@@ -225,21 +225,23 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     @Override
-    public URI ServletUpdate(int ID) {
+    public URI ServletUpdate(int id, int page, int entry) {
         return UriBuilder.fromPath(getServletUpdatePath())
-                .queryParam(ATTRIBUT_ID, ID)
+                .queryParam(ATTRIBUT_ID, id)
+                .queryParam(ATTRIBUT_PAGE, page)
+                .queryParam(ATTRIBUT_ENTRY, entry)
                 .build();
     }
 
     @Override
-    public URI ServletUpdate(DogDTO dog) {
-        return ServletUpdate(dog.getID());
+    public URI ServletUpdate(DogDTO dog, int page, int entry) {
+        return ServletUpdate(dog.getID(), page, entry);
     }
 
     @Override
-    public List<URI> ServletUpdate(List<DogDTO> dogs) {
+    public List<URI> ServletUpdate(List<DogDTO> dogs, int page, int entry) {
         return dogs.stream()
-                .map(dog -> ServletUpdate(dog))
+                .map(dog -> ServletUpdate(dog, page, entry))
                 .collect(Collectors.toList());
     }
 }
