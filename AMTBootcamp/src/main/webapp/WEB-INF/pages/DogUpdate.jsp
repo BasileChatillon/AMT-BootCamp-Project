@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>chien modification</title>
+        <title>Dog Update</title>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -24,9 +24,9 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/">Home</a></li>
-                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog">Dog Display</a></li>
-                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/create">Dog Creation</a></li>
-                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/generate">Dog Generator</a></li>
+                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog">Affichage</a></li>
+                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/create">Création</a></li>
+                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/generate">Generator</a></li>
                 </ul>
             </div>
         </nav>

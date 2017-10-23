@@ -7,13 +7,12 @@ package ch.heigvd.amt.amtbootcamp.rest;
 
 import ch.heigvd.amt.amtbootcamp.model.Dog;
 import ch.heigvd.amt.amtbootcamp.rest.dto.DogDTO;
+import ch.heigvd.amt.amtbootcamp.services.CreateLinkLocal;
 import ch.heigvd.amt.amtbootcamp.services.dao.CreateDogLocal;
 import ch.heigvd.amt.amtbootcamp.services.dao.DeleteDogLocal;
 import ch.heigvd.amt.amtbootcamp.services.dao.GetDogLocal;
 import ch.heigvd.amt.amtbootcamp.services.dao.UpdateDogLocal;
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -25,7 +24,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -38,7 +36,6 @@ public class DogRessource {
 
     private final int maxNameLength = 45;
     private final int maxQuoteLegth = 200;
-    private final String pathDocker = "http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/api/";
 
     @Context
     UriInfo uriInfo;
@@ -55,6 +52,9 @@ public class DogRessource {
     @EJB
     UpdateDogLocal updateDog;
 
+    @EJB
+    CreateLinkLocal createLinks;
+
     /**
      * Permet d'ajouter un chien dans la base de donnée
      *
@@ -69,16 +69,15 @@ public class DogRessource {
 
         System.out.println("Creating a new Dog");
 
-        if(dog.getName().length() > maxNameLength){
+        if (dog.getName().length() > maxNameLength) {
             dog.setName(dog.getName().substring(maxNameLength));
         }
-        
-        if(dog.getQuote().length() > maxQuoteLegth){
+
+        if (dog.getQuote().length() > maxQuoteLegth) {
             dog.setQuote(dog.getQuote().substring(maxQuoteLegth));
         }
-        
+
         DogDTO newDog = createDog.createDog(dog);
-        
 
         if (newDog == null) {
 
@@ -87,7 +86,7 @@ public class DogRessource {
                     .build();
         }
 
-        URI addresse = DogRessource.this.createLinkGet(newDog.getID());
+        URI addresse = createLinks.APIGet(newDog.getID());
 
         return Response.created(addresse)
                 .status(Response.Status.CREATED)
@@ -135,14 +134,14 @@ public class DogRessource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response dogUpdate(@PathParam("id") int id, Dog dog) {
-        if(dog.getName().length() > maxNameLength){
+        if (dog.getName().length() > maxNameLength) {
             dog.setName(dog.getName().substring(maxNameLength));
         }
-        
-        if(dog.getQuote().length() > maxQuoteLegth){
+
+        if (dog.getQuote().length() > maxQuoteLegth) {
             dog.setQuote(dog.getQuote().substring(maxQuoteLegth));
         }
-        
+
         System.out.println("Updating a Dog");
 
         // Si le chien n'existe pas dans la db on retourne not foud
@@ -163,7 +162,7 @@ public class DogRessource {
 
         System.out.println("Le chien a bien été ajouté");
 
-        URI addresse = createLinkGet(id);
+        URI addresse = createLinks.APIGet(id);
 
         return Response.created(addresse)
                 .status(Response.Status.ACCEPTED)
@@ -204,116 +203,5 @@ public class DogRessource {
         }
 
         return null;
-    }
-
-    /**
-     * Permet de créer le lien de récupération d'un chien
-     *
-     * @param dog Le chien qui va permettre la création de l'ID
-     * @return l'URI destiné à la suppresion du chien
-     */
-    public URI createLinkGet(DogDTO dog) {
-        // Crée l'url pour pouvoir récupérer le chien
-        return createLinkGet(dog.getID());
-    }
-
-    /**
-     * Permet de créer l'URL pour visioner un chien.
-     *
-     * @param ID l'ID du chien dont on doit créer l'URL
-     * @return L'URI
-     */
-    public URI createLinkGet(int ID) {
-        return UriBuilder.fromPath(pathDocker)
-                .path(DogRessource.class)
-                .path(DogRessource.class, "dogGet")
-                .build(ID);
-    }
-
-    /**
-     * Permet de créer l'URL pour modifier un chien.
-     *
-     * @param ID l'ID du chien que l'on désire modifier
-     * @return L'URI
-     */
-    public URI createLinkUpdate(int ID) {
-        return UriBuilder.fromPath(pathDocker)
-                .path(DogRessource.class)
-                .path(DogRessource.class, "dogUpdate")
-                .build(ID);
-    }
-
-    /**
-     * Permet de créer l'URL pour créer des chien àléatoire
-     *
-     * @param number Le nombre de chien a creer
-     * @return L'URI
-     */
-    public URI createLinkCreateRandom(int number) {
-        return UriBuilder.fromPath(pathDocker)
-                .path(DogRessource.class)
-                .path(DogRessource.class, "dogCreateRandom")
-                .build(number);
-    }
-
-    /**
-     * Génère l?URI pour créer un chien
-     *
-     * @return
-     */
-    public URI createLinkCustom() {
-        return UriBuilder.fromPath(pathDocker)
-                .path(DogRessource.class)
-                .path(DogRessource.class, "createDog")
-                .build();
-    }
-
-    /**
-     * Permet de créer le lien de suppression d'une ID de chien
-     *
-     * @param id Le chien qui va permettre la création de l'ID
-     * @return l'URI destiné à la suppresion du chien
-     */
-    public URI createLinkDelete(int id) {
-        // Crée l'url pour pouvoir supprimer le chien
-        return UriBuilder.fromPath(pathDocker)
-                .path(DogRessource.class)
-                .path(DogRessource.class, "dogDelete")
-                .build(id);
-    }
-
-    /**
-     * Permet de créer le lien de suppression d'un chien
-     *
-     * @param dog Le chien qui va permettre la création de l'ID
-     * @return l'URI destiné à la suppresion du chien
-     */
-    public URI createLinkDelete(DogDTO dog) {
-        // Crée l'url pour pouvoir supprimer le chien
-        return createLinkDelete(dog.getID());
-    }
-
-    /**
-     * Permet de récuprer les url de suppresion d'une liste de chiens
-     *
-     * @param dogs la List de chien dont on veut créé les liens de suppresion
-     * @return La liste des liens de suppression
-     */
-    public List<URI> createLinksDelete(List<DogDTO> dogs) {
-        return dogs.stream()
-                .map(dog -> createLinkDelete(dog))
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Convertit des URIs de en string
-     *
-     * @param uris La liste des URIs que l'on veut transformer
-     * @return Les URIs en string
-     */
-    public List<String> createStringLinks(List<URI> uris) {
-        return uris.stream()
-                .map(uri -> uri.toString())
-                .collect(Collectors.toList());
     }
 }

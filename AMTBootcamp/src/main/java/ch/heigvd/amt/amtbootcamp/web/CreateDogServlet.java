@@ -7,6 +7,7 @@ package ch.heigvd.amt.amtbootcamp.web;
 
 import ch.heigvd.amt.amtbootcamp.model.Dog;
 import ch.heigvd.amt.amtbootcamp.rest.DogRessource;
+import ch.heigvd.amt.amtbootcamp.services.CreateLinkLocal;
 import ch.heigvd.amt.amtbootcamp.services.JsonifyDogLocal;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -24,16 +25,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CreateDogServlet extends HttpServlet {
 
-    private final String Param_Name = "name";
-    private final String Param_Age = "age";
-    private final String Param_Weight = "weight";
-    private final String Param_Quote = "quote";
+    private final String ATTRIBUT_NAME = "name";
+    private final String ATTRIBUT_AGE = "age";
+    private final String ATTRIBUT_WEIGHT = "weight";
+    private final String ATTRIBUT_QUOTE = "quote";
 
     @EJB
     DogRessource dogRessource;
 
     @EJB
     JsonifyDogLocal jsonifyDog;
+
+    @EJB
+    CreateLinkLocal createLink;
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -63,10 +67,10 @@ public class CreateDogServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String nameCheck = request.getParameter(Param_Name);
-        String ageCheck = request.getParameter(Param_Age);
-        String weightCheck = request.getParameter(Param_Weight);
-        String quoteCheck = request.getParameter(Param_Quote);
+        String nameCheck = request.getParameter(ATTRIBUT_NAME);
+        String ageCheck = request.getParameter(ATTRIBUT_AGE);
+        String weightCheck = request.getParameter(ATTRIBUT_WEIGHT);
+        String quoteCheck = request.getParameter(ATTRIBUT_QUOTE);
 
         System.out.println(nameCheck);
         System.out.println(ageCheck);
@@ -78,11 +82,11 @@ public class CreateDogServlet extends HttpServlet {
                 || ageCheck == null || ageCheck.isEmpty()
                 || weightCheck == null || weightCheck.isEmpty()
                 || quoteCheck == null || quoteCheck.isEmpty()) {
-            response.sendRedirect("http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/create");
+            response.sendRedirect(createLink.getServletCreatePath());
             return;
         }
 
-        URL link = dogRessource.createLinkCustom().toURL();
+        URL link = createLink.APICustom().toURL();
 
         HttpURLConnection con = (HttpURLConnection) link.openConnection();
         con.setDoOutput(true);
@@ -91,10 +95,10 @@ public class CreateDogServlet extends HttpServlet {
         con.setRequestProperty("Accept", "application/json");
         con.setRequestMethod("POST");
 
-        String JSON = jsonifyDog.jsonifyDog(new Dog(request.getParameter(Param_Name),
-                Integer.parseInt(request.getParameter(Param_Age)),
-                Double.parseDouble(request.getParameter(Param_Weight)),
-                request.getParameter(Param_Quote)));
+        String JSON = jsonifyDog.jsonifyDog(new Dog(nameCheck,
+                Integer.parseInt(ageCheck),
+                Double.parseDouble(weightCheck),
+                quoteCheck));
 
         System.out.println(JSON);
 
@@ -108,7 +112,7 @@ public class CreateDogServlet extends HttpServlet {
         con.disconnect();
 
         // Forward de la requête
-        response.sendRedirect("http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog");
+        response.sendRedirect(createLink.getServletDisplayPath());
     }
 
     /**

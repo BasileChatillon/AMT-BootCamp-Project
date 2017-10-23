@@ -6,6 +6,7 @@
 package ch.heigvd.amt.amtbootcamp.web;
 
 import ch.heigvd.amt.amtbootcamp.rest.DogRessource;
+import ch.heigvd.amt.amtbootcamp.services.CreateLinkLocal;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -23,6 +24,9 @@ public class GenerateDogServlet extends HttpServlet {
 
     @EJB
     DogRessource dogRessource;
+
+    @EJB
+    CreateLinkLocal createLink;
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -56,18 +60,18 @@ public class GenerateDogServlet extends HttpServlet {
 
         int defaultNumberDog = 0;
         if (nbDogToGenerate != null && !nbDogToGenerate.isEmpty()) {
-            defaultNumberDog = Integer.parseInt(request.getParameter("nbtogenerate"));
+            defaultNumberDog = Integer.parseInt(nbDogToGenerate);
         }
 
         if (defaultNumberDog > 1234567) {
             defaultNumberDog = 1234567;
         }
 
-        URI link = dogRessource.createLinkCreateRandom(defaultNumberDog);
+        URI link = createLink.APICreateRandom(defaultNumberDog);
         InputStream rsp = link.toURL().openStream();
 
         // Forward de la requête
-        response.sendRedirect("http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog");
+        response.sendRedirect(createLink.getServletDisplayPath());
     }
 
     /**
