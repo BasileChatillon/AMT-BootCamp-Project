@@ -17,6 +17,20 @@
         <title>chien modification</title>
     </head>
     <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/">Hello Dogs!</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/">Home</a></li>
+                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog">Dog Display</a></li>
+                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/create">Dog Creation</a></li>
+                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/generate">Dog Generator</a></li>
+                </ul>
+            </div>
+        </nav>
+
         <div class="container">
             <h2>Modifier le chien!</h2>
             <form class="form-horizontal" method="post">
