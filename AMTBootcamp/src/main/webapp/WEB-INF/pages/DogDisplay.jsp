@@ -62,12 +62,6 @@
         
         <table>
             <tr>
-                <td align="right" colspan="2">Générer des chiens aléatoires <a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/generate">x</a></td>
-            </tr>
-            <tr>
-                <td align="right" colspan="2">Créer un chien <a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/create">x</a></td>
-            </tr>
-            <tr>
                 <td colspan="2">
                     <table id="tabledisplaydog">
                         <tr>
@@ -117,7 +111,5 @@
                 </td>
             </tr>
         </table>
-
     </body>
-
 </html>
