@@ -1,10 +1,5 @@
-<%-- 
-    Document   : DogCreate
-    Created on : 22 oct. 2017, 13:10:30
-    Author     : basilechatillon
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +26,7 @@
                 </ul>
             </div>
         </nav>
-        
+
         <div class="container">
             <h2>Créer un chien!</h2>
             <form class="form-horizontal" method="post">

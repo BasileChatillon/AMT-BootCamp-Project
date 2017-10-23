@@ -1,10 +1,5 @@
-<%-- 
-    Document   : DogUpdate
-    Created on : 22 oct. 2017, 13:10:41
-    Author     : basilechatillon
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>

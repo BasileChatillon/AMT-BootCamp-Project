@@ -1,11 +1,6 @@
-<%-- 
-    Document   : DogDisplay
-    Created on : 13 oct. 2017, 11:27:56
-    Author     : basilechatillon
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
     <style>
@@ -59,7 +54,7 @@
                 </ul>
             </div>
         </nav>
-        
+
         <table>
             <tr>
                 <td colspan="2">

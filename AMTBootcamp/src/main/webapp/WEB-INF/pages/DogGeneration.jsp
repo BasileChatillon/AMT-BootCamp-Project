@@ -1,10 +1,5 @@
-<%-- 
-    Document   : DogGeneration
-    Created on : 22 oct. 2017, 13:10:50
-    Author     : basilechatillon
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +26,7 @@
                 </ul>
             </div>
         </nav>
-        
+
         <div class="container">
             <h2>Générer des chiens!</h2>
             <form class="form-horizontal" method="post">
