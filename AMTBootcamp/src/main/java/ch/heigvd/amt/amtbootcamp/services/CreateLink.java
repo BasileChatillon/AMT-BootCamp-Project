@@ -32,6 +32,7 @@ public class CreateLink implements CreateLinkLocal {
     private final String ATTRIBUT_PAGE = "page";
     private final String ATTRIBUT_ENTRY = "entry";
 
+    /**** Fonction pour récuprer les différent path ****/
     @Override
     public String getAPIPath() {
         return pathDocker + pathAPI;
@@ -77,7 +78,7 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     /**
-     * Génère l?URI pour créer un chien
+     * Génère l'URI pour créer un chien
      *
      * @return
      */
@@ -182,6 +183,15 @@ public class CreateLink implements CreateLinkLocal {
                 .build(number);
     }
 
+    /**
+     * Permet de créer un lien vers le servlet qui suppirmera un chien selon son ID
+     * Permet également de garder la trace de la page/entry actuel
+     * 
+     * @param id Le chien à supprimer
+     * @param page La page courante
+     * @param entry Le nombre de chien par page 
+     * @return L'URI
+     */
     @Override
     public URI ServletDelete(int id, int page, int entry) {
         return UriBuilder.fromPath(getServletDeletePath())
@@ -191,11 +201,29 @@ public class CreateLink implements CreateLinkLocal {
                 .build();
     }
 
+    /**
+     * Permet de créer un lien vers le servlet qui suppirmera un chien
+     * Permet également de garder la trace de la page/entry actuel
+     * 
+     * @param dog Le chien
+     * @param page La page courante
+     * @param entry Le nombre de chien par page 
+     * @return L'URI
+     */
     @Override
     public URI ServletDelete(DogDTO dog, int page, int entry) {
         return ServletDelete(dog.getID(), page, entry);
     }
 
+    /**
+     * Permet de créer les liens vers le servlet qui permettent de supprimer la list de chien
+     * Permet également de garder la trace de la page/entry actuel
+     * 
+     * @param dogs Les chiens
+     * @param page La page courante
+     * @param entry Le nombre de chien par page 
+     * @return La Liste des URIs
+     */
     @Override
     public List<URI> ServletDelete(List<DogDTO> dogs, int page, int entry) {
         return dogs.stream()
@@ -203,6 +231,14 @@ public class CreateLink implements CreateLinkLocal {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Permet de créer un lien vers le servlet pour afficher les chiens.
+     * Permet également de garder la trace de la page/entry actuel
+     * 
+     * @param pageNumber La page courante
+     * @param entry Le nombre de chien par page 
+     * @return 
+     */
     @Override
     public URI ServletDisplayPage(int pageNumber, int entry) {
         return UriBuilder.fromPath(getServletDisplayPath())
@@ -212,10 +248,12 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     /**
-     *
-     * @param pageNumber
-     * @param entries
-     * @return
+     * Permet de créer un lien vers le servlet pour afficher les chiens avec une 
+     * liste de nombre de chiens par page.
+     * 
+     * @param pageNumber La page courante
+     * @param entries Le nombre de chien par page 
+     * @return 
      */
     @Override
     public List<URI> ServletDisplayPage(int pageNumber, List<Integer> entries) {
@@ -224,6 +262,15 @@ public class CreateLink implements CreateLinkLocal {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Permet de créer un lien vers le servlet pour mettre à jour un chien selon son ID
+     * Permet également de garder la trace de la page/entry actuel
+     * 
+     * @param id L'id du chien à modifier
+     * @param page La page courante
+     * @param entry Le nombre de chien par page 
+     * @return 
+     */
     @Override
     public URI ServletUpdate(int id, int page, int entry) {
         return UriBuilder.fromPath(getServletUpdatePath())
@@ -233,11 +280,29 @@ public class CreateLink implements CreateLinkLocal {
                 .build();
     }
 
+    /**
+     * Permet de créer un lien vers le servlet pour mettre à jour un chien selon son ID
+     * Permet également de garder la trace de la page/entry actuel
+     * 
+     * @param dog Le chien à modifier
+     * @param page La page courante
+     * @param entry Le nombre de chien par page 
+     * @return 
+     */
     @Override
     public URI ServletUpdate(DogDTO dog, int page, int entry) {
         return ServletUpdate(dog.getID(), page, entry);
     }
 
+    /**
+     * Permet de créer un lien vers le servlet pour mettre à jour des chien 
+     * Permet également de garder la trace de la page/entry actuel
+     * 
+     * @param dogs Les chiens à modifier
+     * @param page La page courante
+     * @param entry Le nombre de chien par page 
+     * @return 
+     */
     @Override
     public List<URI> ServletUpdate(List<DogDTO> dogs, int page, int entry) {
         return dogs.stream()

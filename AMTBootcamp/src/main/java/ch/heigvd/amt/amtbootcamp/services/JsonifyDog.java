@@ -16,6 +16,13 @@ import javax.ejb.Stateless;
 @Stateless
 public class JsonifyDog implements JsonifyDogLocal {
     
+    /**
+     * Méthode de pauvre qui permet de transofmer un chien en JSON
+     * On a un peu honte d'avoir fait ça
+     * 
+     * @param dog le chien à jonifier
+     * @return Le JSON d'un chien
+     */
     @Override
     public String jsonifyDog(Dog dog) {
         return "{"

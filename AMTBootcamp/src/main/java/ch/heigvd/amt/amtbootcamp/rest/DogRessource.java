@@ -130,6 +130,17 @@ public class DogRessource {
         return rsp;
     }
 
+    /**
+     * Méthode permettant de mettre à jour un chien selon son ID
+     * retourne différente erreur en fonction du problème
+     * --> BAD_GATEWAY si aucun chien ne possède l'id donné
+     * --> NOT_MODIFIED si le chien a été trouvé mais non modifié
+     * --> ACCEPTED si tout va bien
+     * 
+     * @param id L'id du chien $ modifier
+     * @param dog Le nouveau chien
+     * @return 
+     */
     @Path("/update/{id}")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

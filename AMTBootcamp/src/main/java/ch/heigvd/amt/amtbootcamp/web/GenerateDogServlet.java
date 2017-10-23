@@ -59,13 +59,11 @@ public class GenerateDogServlet extends HttpServlet {
         String nbDogToGenerate = request.getParameter("nbtogenerate");
 
         int defaultNumberDog = 0;
-        if (nbDogToGenerate != null && !nbDogToGenerate.isEmpty()) {
+        if (nbDogToGenerate != null && !nbDogToGenerate.isEmpty())
             defaultNumberDog = Integer.parseInt(nbDogToGenerate);
-        }
 
-        if (defaultNumberDog > 1234567) {
+        if (defaultNumberDog > 1234567)
             defaultNumberDog = 1234567;
-        }
 
         URI link = createLink.APICreateRandom(defaultNumberDog);
         InputStream rsp = link.toURL().openStream();
@@ -81,7 +79,7 @@ public class GenerateDogServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Generation de chien";
     }// </editor-fold>
 
 }

@@ -160,7 +160,7 @@ public class UpdateDogServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Mis à jour de chien";
     }// </editor-fold>
 
 }

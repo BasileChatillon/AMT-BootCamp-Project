@@ -77,7 +77,7 @@ public class DeleteDogServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Supression d'un chien";
     }// </editor-fold>
 
 }
