@@ -66,7 +66,7 @@ public class DogRessource {
     public Response createDog(Dog dog) {
 
         System.out.println("Creating a new Dog");
-        
+
         DogDTO newDog = createDog.createDog(dog);
 
         if (newDog == null) {
@@ -177,7 +177,7 @@ public class DogRessource {
     @Produces(MediaType.APPLICATION_JSON)
     public DogDTO dogDelete(@PathParam("id") int id) {
         System.out.println("Deleting a Dog");
-        
+
         DogDTO dogToDelete = getDog.findDog(id);
 
         if (deleteDog.deleteDog(id)) {
@@ -210,11 +210,24 @@ public class DogRessource {
                 .path(DogRessource.class, "dogGet")
                 .build(ID);
     }
-    
+
+    /**
+     * Permet de créer l'URL pour modifier un chien.
+     *
+     * @param ID l'ID du chien que l'on désire modifier
+     * @return L'URI
+     */
+    public URI createLinkUpdate(int ID) {
+        return UriBuilder.fromPath(pathDocker)
+                .path(DogRessource.class)
+                .path(DogRessource.class, "dogUpdate")
+                .build(ID);
+    }
+
     /**
      * Permet de créer l'URL pour créer des chien àléatoire
      *
-     * @param number  Le nombre de chien a creer
+     * @param number Le nombre de chien a creer
      * @return L'URI
      */
     public URI createLinkCreateRandom(int number) {
@@ -223,11 +236,11 @@ public class DogRessource {
                 .path(DogRessource.class, "dogCreateRandom")
                 .build(number);
     }
-    
+
     /**
      * Génère l?URI pour créer un chien
-     * 
-     * @return 
+     *
+     * @return
      */
     public URI createLinkCustom() {
         return UriBuilder.fromPath(pathDocker)
@@ -249,7 +262,7 @@ public class DogRessource {
                 .path(DogRessource.class, "dogDelete")
                 .build(id);
     }
-    
+
     /**
      * Permet de créer le lien de suppression d'un chien
      *

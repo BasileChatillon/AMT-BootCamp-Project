@@ -29,8 +29,9 @@ public class DisplayDogServlet extends HttpServlet {
 
     @EJB
     private DogRessource dogRessource;
-    
-    private DeleteDogServlet deleteServlet = new DeleteDogServlet();
+
+    private final DeleteDogServlet deleteServlet = new DeleteDogServlet();
+    private final UpdateDogServlet updateServlet = new UpdateDogServlet();
 
     private final String PAGE_ATTRIBUT = "page";
     private final String ENTRY_ATTRIBUT = "entry";
@@ -71,13 +72,16 @@ public class DisplayDogServlet extends HttpServlet {
         List<DogDTO> dogs = getDog.findDogsPages(defaultPageNumber, defaultDogsInPage);
 
         // Création des lien de suppressions des chiens
-        //List<URI> uris = dogRessource.createLinksDelete(dogs);
-        List<URI> uris = deleteServlet.createLinksDeleteServlet(dogs);
-        List<String> urisS = dogRessource.createStringLinks(uris);
+        List<URI> urisDelete = deleteServlet.createLinksDeleteServlet(dogs);
+        List<String> urisDeleteS = dogRessource.createStringLinks(urisDelete);
+
+        List<URI> urisUpdate = updateServlet.createLinkUpdateServlet(dogs);
+        List<String> urisUpdateS = dogRessource.createStringLinks(urisUpdate);
 
         // Ajout des attributs dans la requête
         request.setAttribute("dogs", dogs);
-        request.setAttribute("uris", urisS);
+        request.setAttribute("urisDelete", urisDeleteS);
+        request.setAttribute("urisUpdate", urisUpdateS);
 
         // Forward de la requête
         request.getRequestDispatcher("/WEB-INF/pages/DogDisplay.jsp").forward(request, response);

@@ -27,6 +27,7 @@
                 <th>Poids du Chien</th>
                 <th>Le Chien dit :</th>
                 <th>Pour tuer le chien</th>
+                <th>Pour modifier le chien
             </tr>
             <c:forEach var="dog" items="${requestScope.dogs}" varStatus="status"> 
                 <tr>
@@ -34,7 +35,8 @@
                     <td>${dog.age}</td>
                     <td>${dog.weight}</td>
                     <td>${dog.quote}</td>
-                    <td><a href="${requestScope.uris[status.index]}" onclick="return confirm('Do you really want to kill a puppy?? :(')"> Tuer le chien </a></td>
+                    <td><a href="${requestScope.urisDelete[status.index]}" onclick="return confirm('Do you really want to kill a puppy?? :(')"> Tuer le chien </a></td>
+                    <td><a href="${requestScope.urisUpdate[status.index]}" > modifier </a></td>
                 </tr>
             </c:forEach>
         </table>
