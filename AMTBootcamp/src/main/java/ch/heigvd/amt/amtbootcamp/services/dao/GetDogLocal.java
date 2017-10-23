@@ -24,7 +24,7 @@ public interface GetDogLocal {
     public List<DogDTO> findAllDogs();
 
     /**
-     * Permet de trouver une list de chien dans la base de donnée voir public
+     * Permet de trouver une liste de chien dans la base de donnée voir public
      * DogDTO findDog(int ID);
      *
      * @param IDs La liste des IDs des chiens

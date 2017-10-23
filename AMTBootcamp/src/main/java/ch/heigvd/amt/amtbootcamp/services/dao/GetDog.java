@@ -53,7 +53,7 @@ public class GetDog implements GetDogLocal {
 
     @Override
     public List<DogDTO> findDogs(List<Integer> IDs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

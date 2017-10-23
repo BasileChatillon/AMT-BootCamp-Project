@@ -1,4 +1,3 @@
-
 package ch.heigvd.amt.amtbootcamp.model;
 
 public class Dog {

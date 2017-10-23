@@ -1,4 +1,3 @@
-
 package ch.heigvd.amt.amtbootcamp.rest.dto;
 
 import ch.heigvd.amt.amtbootcamp.model.Dog;

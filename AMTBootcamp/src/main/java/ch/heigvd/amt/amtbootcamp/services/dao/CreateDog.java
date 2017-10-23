@@ -46,13 +46,13 @@ public class CreateDog implements CreateDogLocal {
 
             int rs = pstmt.executeUpdate();
 
-            // Si le chien a bien été créé, on va tenter de recupéré son ID
+            // Si le chien a bien été créé, on va tenter de recupérer son ID
             if (rs > 0) {
                 String query2 = "SELECT LAST_INSERT_ID()";
                 PreparedStatement pstmt2 = connection.prepareStatement(query2);
                 ResultSet rs2 = pstmt2.executeQuery();
 
-                // lorsqu'on réussi à récuprer l'ID, on va créer le chien avec son ID
+                // Lorsqu'on réussit à récupàrer l'ID, on va créer le chien avec son ID
                 if (rs2.next()) {
                     dogID = rs2.getInt(1);
                     newDog = new DogDTO(dog, dogID);

@@ -29,7 +29,7 @@ public class DeleteDog implements DeleteDogLocal {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, id);
 
-            // On execute la query et on recupère la valeur de retour pour voir si le chien a bien été supprimé
+            // On exécute la query et on récupère la valeur de retour pour voir si le chien a bien été supprimé
             i = pstmt.executeUpdate();
 
             connection.close();

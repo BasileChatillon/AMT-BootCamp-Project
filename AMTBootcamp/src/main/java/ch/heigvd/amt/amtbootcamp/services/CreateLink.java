@@ -24,7 +24,7 @@ public class CreateLink implements CreateLinkLocal {
     private final String ATTRIBUT_PAGE = "page";
     private final String ATTRIBUT_ENTRY = "entry";
 
-    /**** Fonction pour récuprer les différent path ****/
+    /**** Fonction pour récupérer les différents path ****/
     @Override
     public String getAPIPath() {
         return pathDocker + pathAPI;
@@ -83,10 +83,10 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     /**
-     * Permet de créer le lien de suppression d'une ID de chien
+     * Permet de créer le lien de suppression d'un chien
      *
-     * @param id Le chien qui va permettre la création de l'ID
-     * @return l'URI destiné à la suppresion du chien
+     * @param id L'ID du chien à supprimer
+     * @return l'URI destiné à la suppression du chien
      */
     @Override
     public URI APIDelete(int id) {
@@ -100,8 +100,8 @@ public class CreateLink implements CreateLinkLocal {
     /**
      * Permet de créer le lien de suppression d'un chien
      *
-     * @param dog Le chien qui va permettre la création de l'ID
-     * @return l'URI destiné à la suppresion du chien
+     * @param dog Le chien à supprimer
+     * @return l'URI destiné à la suppression du chien
      */
     @Override
     public URI APIDelete(DogDTO dog) {
@@ -110,9 +110,9 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     /**
-     * Permet de récuprer les url de suppresion d'une liste de chiens
+     * Permet de récupérer les url de suppression d'une liste de chiens
      *
-     * @param dogs la List de chien dont on veut créé les liens de suppresion
+     * @param dogs la List de chien dont on veut créer les liens de suppression
      * @return La liste des liens de suppression
      */
     @Override
@@ -136,7 +136,7 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     /**
-     * Permet de créer l'URL pour visioner un chien.
+     * Permet de créer l'URL pour visionner un chien.
      *
      * @param ID l'ID du chien dont on doit créer l'URL
      * @return L'URI
@@ -153,7 +153,7 @@ public class CreateLink implements CreateLinkLocal {
      * Permet de créer le lien de récupération d'un chien
      *
      * @param dog Le chien qui va permettre la création de l'ID
-     * @return l'URI destiné à la suppresion du chien
+     * @return l'URI destiné à la suppression du chien
      */
     @Override
     public URI APIGet(DogDTO dog) {
@@ -162,7 +162,7 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     /**
-     * Permet de créer l'URL pour créer des chien àléatoire
+     * Permet de créer l'URL pour créer des chiens aléatoires
      *
      * @param number Le nombre de chien a creer
      * @return L'URI
@@ -176,12 +176,12 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     /**
-     * Permet de créer un lien vers le servlet qui suppirmera un chien selon son ID
+     * Permet de créer un lien vers le servlet qui supprimera un chien selon son ID
      * Permet également de garder la trace de la page/entry actuel
      * 
      * @param id Le chien à supprimer
      * @param page La page courante
-     * @param entry Le nombre de chien par page 
+     * @param entry Le nombre de chiens par page 
      * @return L'URI
      */
     @Override
@@ -194,7 +194,7 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     /**
-     * Permet de créer un lien vers le servlet qui suppirmera un chien
+     * Permet de créer un lien vers le servlet qui supprimera un chien
      * Permet également de garder la trace de la page/entry actuel
      * 
      * @param dog Le chien
@@ -208,7 +208,7 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     /**
-     * Permet de créer les liens vers le servlet qui permettent de supprimer la list de chien
+     * Permet de créer les liens vers le servlet qui permettent de supprimer la liste de chien
      * Permet également de garder la trace de la page/entry actuel
      * 
      * @param dogs Les chiens
@@ -260,7 +260,7 @@ public class CreateLink implements CreateLinkLocal {
      * 
      * @param id L'id du chien à modifier
      * @param page La page courante
-     * @param entry Le nombre de chien par page 
+     * @param entry Le nombre de chiens par page 
      * @return 
      */
     @Override
@@ -278,7 +278,7 @@ public class CreateLink implements CreateLinkLocal {
      * 
      * @param dog Le chien à modifier
      * @param page La page courante
-     * @param entry Le nombre de chien par page 
+     * @param entry Le nombre de chiens par page 
      * @return 
      */
     @Override
@@ -287,7 +287,7 @@ public class CreateLink implements CreateLinkLocal {
     }
 
     /**
-     * Permet de créer un lien vers le servlet pour mettre à jour des chien 
+     * Permet de créer un lien vers le servlet pour mettre à jour des chiens 
      * Permet également de garder la trace de la page/entry actuel
      * 
      * @param dogs Les chiens à modifier
