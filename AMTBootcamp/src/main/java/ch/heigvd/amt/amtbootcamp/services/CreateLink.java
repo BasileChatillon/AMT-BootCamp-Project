@@ -12,7 +12,7 @@ import javax.ws.rs.core.UriBuilder;
 @Stateless
 public class CreateLink implements CreateLinkLocal {
 
-    private final String pathDocker = "http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/";
+    private final String pathDocker = "http://localhost:9090/AMTBootcamp-1.0-SNAPSHOT/";
     private final String pathAPI = "api/";
     private final String pathDeleteServlet = "dog/delete";
     private final String pathCreateServlet = "dog/create";

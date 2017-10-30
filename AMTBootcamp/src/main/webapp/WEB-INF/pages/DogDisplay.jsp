@@ -47,10 +47,10 @@
                     <a class="navbar-brand" href="https://www.nzhuntingandshooting.co.nz/attachments/f68/37001d1432844124-photos-your-dog-branch-manager.jpg">Hello Dogs!</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/">Home</a></li>
-                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog">Affichage</a></li>
-                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/create">Création</a></li>
-                    <li><a href="http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/dog/generate">Generator</a></li>
+                    <li class="active"><a href="http://localhost:9090/AMTBootcamp-1.0-SNAPSHOT/">Home</a></li>
+                    <li><a href="http://localhost:9090/AMTBootcamp-1.0-SNAPSHOT/dog">Affichage</a></li>
+                    <li><a href="http://localhost:9090/AMTBootcamp-1.0-SNAPSHOT/dog/create">Création</a></li>
+                    <li><a href="http://localhost:9090/AMTBootcamp-1.0-SNAPSHOT/dog/generate">Generator</a></li>
                 </ul>
             </div>
         </nav>
