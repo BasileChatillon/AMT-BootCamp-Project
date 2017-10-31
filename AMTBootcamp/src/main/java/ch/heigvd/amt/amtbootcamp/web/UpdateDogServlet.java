@@ -56,7 +56,7 @@ public class UpdateDogServlet extends HttpServlet {
         String pageParam = request.getParameter(ATTRIBUT_PAGE);
         String dogsInPageParam = request.getParameter(ATTRIBUT_ENTRY);
 
-        // gestion des paraètres : On tente de récupéré la valeur des param
+        // Gestion des paraètres : On tente de récupérer la valeur des paramètres
         if (pageParam != null && !pageParam.isEmpty()) {
             request.setAttribute(ATTRIBUT_PAGE, Integer.parseInt(pageParam));
         }
@@ -96,14 +96,14 @@ public class UpdateDogServlet extends HttpServlet {
 
         
                 
-        // gestion des paraètres pour la gestion des pages
+        // Gestion des paramètres pour la gestion des pages
         String linkReturn;
         if (pageParam != null && !pageParam.isEmpty() && dogsInPageParam != null && !dogsInPageParam.isEmpty())
             linkReturn = createLink.ServletDisplayPage(Integer.parseInt(pageParam), Integer.parseInt(dogsInPageParam)).toString();
         else
             linkReturn = createLink.getServletDisplayPath();
         
-        // gestion des paraètres : On tente de récupéré la valeur des param
+        // Gestion des paramètres : On tente de récupérer la valeur des paramètres
         if (idCheck == null || idCheck.isEmpty()
                 || nameCheck == null || nameCheck.isEmpty()
                 || ageCheck == null || ageCheck.isEmpty()

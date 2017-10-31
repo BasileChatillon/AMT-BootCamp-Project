@@ -8,7 +8,7 @@ import javax.ejb.Local;
 public interface CreateDogLocal {
 
     /**
-     * Méthode permettant de créé un chien et de l'ajouter dans la base de
+     * Méthode permettant de créer un chien et de l'ajouter dans la base de
      * donnée
      *
      * @param dog Le nouveau chien
@@ -17,11 +17,11 @@ public interface CreateDogLocal {
     public DogDTO createDog(Dog dog);
 
     /**
-     * Permet de créer un nombre aléatoire de chien aléatoire. Son nom, son
-     * poids, sa taille et sa quote seront généré aléatoirement
+     * Permet de créer un nombre de chien aléatoire. Son nom, son
+     * poids, sa taille et sa quote seront générés aléatoirement
      *
      * @param number Le nombre de chien
-     * @return retourne la liste de chien créé avec leur ID;
+     * @return Le nombre de chiens créés
      */
     public int createRandomDogs(int number);
 

@@ -68,7 +68,7 @@ public class CreateDogServlet extends HttpServlet {
         System.out.println(weightCheck);
         System.out.println(quoteCheck);
 
-        // gestion des paraètres : On tente de récupéré la valeur des param
+        // Gestion des paramètres : On tente de récupérer la valeur des paramètres
         if (nameCheck == null || nameCheck.isEmpty()
                 || ageCheck == null || ageCheck.isEmpty()
                 || weightCheck == null || weightCheck.isEmpty()

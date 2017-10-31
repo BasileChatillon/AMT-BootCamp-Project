@@ -49,9 +49,9 @@ public class DogRessource {
     /**
      * Permet d'ajouter un chien dans la base de donnée
      *
-     * @param dog le chien qui sera crée
-     * @return retourn un erreur si le chien n'a pas été créé, ou l'URL pour
-     * recevoir les infromations du chien
+     * @param dog le chien qui sera créer
+     * @return Une erreur si le chien n'a pas été créé, ou l'URL pour
+     * recevoir les informations du chien
      */
     @Path("/custom")
     @POST
@@ -85,10 +85,10 @@ public class DogRessource {
     }
 
     /**
-     * Permet de crée des chiens de manière aléatoire
+     * Permet de créer aléatoirement des chiens
      *
      * @param number Le nombre de chien à générer
-     * @return Les chiens généré
+     * @return Les chiens générés
      */
     @Path("/random/{number}")
     @GET
@@ -122,13 +122,13 @@ public class DogRessource {
     }
 
     /**
-     * Méthode permettant de mettre à jour un chien selon son ID
-     * retourne différente erreur en fonction du problème
+     * Méthode permettant de mettre à jour un chien selon son ID.
+     * Retourne différentes erreurs en fonction du problème
      * --> BAD_GATEWAY si aucun chien ne possède l'id donné
      * --> NOT_MODIFIED si le chien a été trouvé mais non modifié
      * --> ACCEPTED si tout va bien
      * 
-     * @param id L'id du chien $ modifier
+     * @param id L'id du chien à modifier
      * @param dog Le nouveau chien
      * @return 
      */
@@ -146,7 +146,7 @@ public class DogRessource {
 
         System.out.println("Updating a Dog");
 
-        // Si le chien n'existe pas dans la db on retourne not foud
+        // Si le chien n'existe pas dans la db on retourne not found
         if (getDog.findDog(id) == null) {
             System.err.println("Le chien est inconnu");
             return Response.status(Response.Status.BAD_GATEWAY)
@@ -154,7 +154,7 @@ public class DogRessource {
                     .build();
         }
 
-        // Si il y a eu une erreur lors de la mise à jour
+        // S'il y a eu une erreur lors de la mise à jour
         if (!updateDog.updateDog(id, dog)) {
             System.err.println("Le chien ne s'est pas ajouté");
             return Response.status(Response.Status.NOT_MODIFIED)
@@ -172,7 +172,7 @@ public class DogRessource {
     }
 
     /**
-     * Permet de récuprer les inforamtions d'un chien
+     * Permet de récupérer les informations d'un chien
      *
      * @param id l'ID du chien dont on veut obtenir les informations
      * @return Le JSON du chien
@@ -186,8 +186,8 @@ public class DogRessource {
     }
 
     /**
-     * Permet de supprimer un chien selon son ID Si la suppression échoue,
-     * retourne null
+     * Permet de supprimer un chien selon son ID.
+     * Si la suppression échoue, retourne null
      *
      * @param id l'ID du chien à supprimer
      * @return Le chien qu'on a supprimé

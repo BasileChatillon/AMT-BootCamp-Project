@@ -31,8 +31,9 @@ public class DisplayDogServlet extends HttpServlet {
      * Handles the HTTP <code>GET</code> method.
      *
      * Permet de trouver les chiens à afficher en fonction de la page et du
-     * nombre de chien par page. Génére églaement les liens de suppression des
-     * chiens Forward ces deux choses à la JSP qui affichera le toute dans un
+     * nombre de chiens par page. Génére également les liens de suppression des
+     * chiens.
+     * Forward ces deux choses à la JSP qui affichera le tout dans un
      * tableau
      *
      * @param request servlet request
@@ -43,15 +44,15 @@ public class DisplayDogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // gestion des paraètres de pagination : on commence par les récupérer
+        // Gestion des paramètres de pagination : on commence par les récupérer
         String pageParam = request.getParameter(ATTRIBUT_PAGE);
         String dogsInPageParam = request.getParameter(ATTRIBUT_ENTRY);
 
-        // gestion des paraètres : valeur par défaut des param
+        // Gestion des paramètres : valeur par défaut des paramètres
         int defaultPageNumber = 1;
         int defaultDogsInPage = 10;
 
-        // gestion des paraètres : On tente de récupéré la valeur des param
+        // Gestion des paramètres : On tente de récupérer la valeur des param
         if (pageParam != null && !pageParam.isEmpty())
             defaultPageNumber = Integer.parseInt(pageParam);
         if (dogsInPageParam != null && !dogsInPageParam.isEmpty())
@@ -70,10 +71,10 @@ public class DisplayDogServlet extends HttpServlet {
         URI lastPage = createLink.ServletDisplayPage(pageMax, defaultDogsInPage);
 
         
-        // Recherche des chiens à afficher en fonctions des param
+        // Recherche des chiens à afficher en fonctions des paramètres
         List<DogDTO> dogs = getDog.findDogsPages(defaultPageNumber - 1, defaultDogsInPage);
 
-        // Création des lien de suppressions des chiens
+        // Création des liens de suppressions des chiens
         List<URI> urisDelete = createLink.ServletDelete(dogs, defaultPageNumber, defaultDogsInPage);
         List<String> urisDeleteS = createLink.createStringLinks(urisDelete);
 

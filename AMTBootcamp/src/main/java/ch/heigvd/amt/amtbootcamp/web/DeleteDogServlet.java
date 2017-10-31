@@ -35,14 +35,14 @@ public class DeleteDogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // gestion des paraètres de pagination : on commence par les récupérer
+        // Gestion des paramètres de pagination : on commence par les récupérer
         String dogIdDelete = request.getParameter(ATTRIBUT_ID);
         String pageParam = request.getParameter(ATTRIBUT_PAGE);
         String dogsInPageParam = request.getParameter(ATTRIBUT_ENTRY);
 
         String linkReturn;
 
-        // gestion des paraètres pour la gestion des pages
+        // Gestion des paramètres pour la gestion des pages
         if (pageParam != null && !pageParam.isEmpty() && dogsInPageParam != null && !dogsInPageParam.isEmpty())
             linkReturn = createLink.ServletDisplayPage(Integer.parseInt(pageParam), Integer.parseInt(dogsInPageParam)).toString();
         else
