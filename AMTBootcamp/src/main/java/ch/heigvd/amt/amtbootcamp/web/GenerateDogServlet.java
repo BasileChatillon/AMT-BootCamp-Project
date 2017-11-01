@@ -32,6 +32,7 @@ public class GenerateDogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Forward de la requête
+        System.out.println("Servlet-generate::GET");
         request.getRequestDispatcher("/WEB-INF/pages/DogGeneration.jsp").forward(request, response);
     }
 
@@ -47,6 +48,7 @@ public class GenerateDogServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        System.out.println("Servlet-generate::POST");
         String nbDogToGenerate = request.getParameter("nbtogenerate");
 
         int defaultNumberDog = 0;
@@ -57,9 +59,11 @@ public class GenerateDogServlet extends HttpServlet {
             defaultNumberDog = 1234567;
 
         URI link = createLink.APICreateRandom(defaultNumberDog);
+        System.out.println("Servlet-generate::POST - lien api de generation " + link.toString());
         InputStream rsp = link.toURL().openStream();
 
         // Forward de la requête
+        System.out.println("Servlet-generate::POST - lien de redirection " + createLink.getServletDisplayPath());
         response.sendRedirect(createLink.getServletDisplayPath());
     }
 

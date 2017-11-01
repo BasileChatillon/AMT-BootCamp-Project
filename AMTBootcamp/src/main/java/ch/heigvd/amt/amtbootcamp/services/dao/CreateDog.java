@@ -34,8 +34,6 @@ public class CreateDog implements CreateDogLocal {
         Connection connection;
         try {
             connection = dataSource.getConnection();
-            System.out.println("Schema : " + connection.getSchema());
-            System.out.println("Catalog : " + connection.getCatalog());
 
             String query = "INSERT INTO dog (dog_name, dog_age, dog_weight, dog_quote) VALUE (?, ?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -80,9 +78,6 @@ public class CreateDog implements CreateDogLocal {
 
             String query = "INSERT INTO dog (dog_name, dog_age, dog_weight, dog_quote) VALUES (?, ?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(query);
-
-            System.out.println("Schema : " + connection.getSchema());
-            System.out.println("Catalog : " + connection.getCatalog());
 
             int nbToIter = number / batchSize;
             System.out.println("ch.heigvd.amt.amtbootcamp.services.dao.CreateDog.createRandomDogs():: nbTo iter " + nbToIter + ".");

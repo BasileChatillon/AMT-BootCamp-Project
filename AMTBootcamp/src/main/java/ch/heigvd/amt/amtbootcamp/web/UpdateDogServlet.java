@@ -52,6 +52,7 @@ public class UpdateDogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        System.out.println("Servlet-update::GET");
         String dogIdDelete = request.getParameter(ATTRIBUT_ID);
         String pageParam = request.getParameter(ATTRIBUT_PAGE);
         String dogsInPageParam = request.getParameter(ATTRIBUT_ENTRY);
@@ -80,6 +81,7 @@ public class UpdateDogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Servlet-update::POST");
 
         String idCheck = request.getParameter(ATTRIBUT_ID);
         String nameCheck = request.getParameter(ATTRIBUT_NAME);
@@ -93,7 +95,6 @@ public class UpdateDogServlet extends HttpServlet {
         System.out.println(ageCheck);
         System.out.println(weightCheck);
         System.out.println(quoteCheck);
-
         
                 
         // Gestion des paramètres pour la gestion des pages
@@ -102,6 +103,8 @@ public class UpdateDogServlet extends HttpServlet {
             linkReturn = createLink.ServletDisplayPage(Integer.parseInt(pageParam), Integer.parseInt(dogsInPageParam)).toString();
         else
             linkReturn = createLink.getServletDisplayPath();
+        
+        System.out.println("Servlet-update::POST - lien de retour " + linkReturn);
         
         // Gestion des paramètres : On tente de récupérer la valeur des paramètres
         if (idCheck == null || idCheck.isEmpty()
@@ -117,6 +120,8 @@ public class UpdateDogServlet extends HttpServlet {
         
 
         URL link = createLink.APIUpdate(Integer.parseInt(idCheck)).toURL();
+        
+        System.out.println("Servlet-update::POST - lien api de generation " + link.toString());
 
         HttpURLConnection con = (HttpURLConnection) link.openConnection();
         con.setDoOutput(true);
@@ -130,7 +135,7 @@ public class UpdateDogServlet extends HttpServlet {
                 Double.parseDouble(weightCheck),
                 quoteCheck));
 
-        System.out.println(JSON);
+        System.out.println("Servlet-update::POST - JSON du chien mis à jour" + JSON);
 
         try (OutputStream os = con.getOutputStream()) {
             os.write(JSON.getBytes());

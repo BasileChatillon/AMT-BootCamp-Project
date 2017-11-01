@@ -23,9 +23,7 @@ public class UpdateDog implements UpdateDogLocal {
 
         try {
             connection = dataSource.getConnection();
-            System.out.println("Schema : " + connection.getSchema());
-            System.out.println("Catalog : " + connection.getCatalog());
-
+            
             String query = "UPDATE dog SET dog_name = ?, dog_age = ?, dog_weight = ?, dog_quote = ? WHERE dog_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
 

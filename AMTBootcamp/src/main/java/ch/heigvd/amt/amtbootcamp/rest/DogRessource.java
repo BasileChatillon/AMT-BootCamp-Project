@@ -16,10 +16,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 @Stateless
 @Path("/dog")
@@ -27,9 +25,6 @@ public class DogRessource {
 
     private final int maxNameLength = 45;
     private final int maxQuoteLegth = 200;
-
-    @Context
-    UriInfo uriInfo;
 
     @EJB
     DeleteDogLocal deleteDog;
@@ -58,7 +53,7 @@ public class DogRessource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createDog(Dog dog) {
 
-        System.out.println("Creating a new Dog");
+        System.out.println("API-create::POST");
 
         if (dog.getName().length() > maxNameLength) {
             dog.setName(dog.getName().substring(maxNameLength));
@@ -71,7 +66,6 @@ public class DogRessource {
         DogDTO newDog = createDog.createDog(dog);
 
         if (newDog == null) {
-
             return Response.status(Response.Status.NOT_ACCEPTABLE)
                     .entity("Could not create")
                     .build();
@@ -93,21 +87,24 @@ public class DogRessource {
     @Path("/random/{number}")
     @GET
     public Response dogCreateRandom(@PathParam("number") int number) {
-        System.out.println("Number of dog to create " + number);
+        System.out.println("API-createRandomDog::Number of dog to create " + number);
         int nbCreated = createDog.createRandomDogs(number);
         Response rsp;
 
         if (number > 0) {
             if (nbCreated == 0) {
+                System.out.println("Servlet-display::GET - Could not Create any Dogs");
                 rsp = Response.status(Response.Status.EXPECTATION_FAILED)
                         .entity("Could not Create any Dogs")
                         .build();
             } else if (nbCreated == number) {
+                System.out.println("Servlet-display::GET - All the dogs created (" + nbCreated + ")");
                 String tmp = "All the dogs created (" + nbCreated + ")";
                 rsp = Response.status(Response.Status.CREATED)
                         .entity(tmp)
                         .build();
             } else {
+                System.out.println("Number of dog Created : " + nbCreated + "( of the " + number + " dogs requested");
                 String tmp = "Number of dog Created : " + nbCreated + "( of the " + number + " dogs requested";
                 rsp = Response.status(Response.Status.CREATED)
                         .entity(tmp)
@@ -136,6 +133,7 @@ public class DogRessource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response dogUpdate(@PathParam("id") int id, Dog dog) {
+        System.out.println("API-update::POST id " + id + " / dog updated " + dog.toString());
         if (dog.getName().length() > maxNameLength) {
             dog.setName(dog.getName().substring(maxNameLength));
         }
@@ -144,11 +142,9 @@ public class DogRessource {
             dog.setQuote(dog.getQuote().substring(maxQuoteLegth));
         }
 
-        System.out.println("Updating a Dog");
-
         // Si le chien n'existe pas dans la db on retourne not found
         if (getDog.findDog(id) == null) {
-            System.err.println("Le chien est inconnu");
+            System.err.println("API-update::POST - Le chien est inconnu");
             return Response.status(Response.Status.BAD_GATEWAY)
                     .entity("Could not find dog")
                     .build();
@@ -156,13 +152,12 @@ public class DogRessource {
 
         // S'il y a eu une erreur lors de la mise à jour
         if (!updateDog.updateDog(id, dog)) {
-            System.err.println("Le chien ne s'est pas ajouté");
+            System.err.println("API-update::POST - Le chien ne s'est pas ajoute");
             return Response.status(Response.Status.NOT_MODIFIED)
                     .entity("Could not update dog")
                     .build();
         }
-
-        System.out.println("Le chien a bien été ajouté");
+        System.err.println("API-update::POST - Le chien a bien ete ajoute");
 
         URI addresse = createLinks.APIGet(id);
 
@@ -181,7 +176,8 @@ public class DogRessource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public DogDTO dogGet(@PathParam("id") int id) {
-        System.out.println("Getting a Dog");
+        System.out.println("API-get::GET - Getting a Dog");
+
         return getDog.findDog(id);
     }
 
@@ -196,8 +192,8 @@ public class DogRessource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public DogDTO dogDelete(@PathParam("id") int id) {
-        System.out.println("Deleting a Dog");
-
+        System.out.println("API-delete::GET - Deleting a Dog");
+        
         DogDTO dogToDelete = getDog.findDog(id);
 
         if (deleteDog.deleteDog(id)) {

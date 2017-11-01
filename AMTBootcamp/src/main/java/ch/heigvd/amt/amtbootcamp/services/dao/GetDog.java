@@ -26,8 +26,6 @@ public class GetDog implements GetDogLocal {
         Connection connection;
         try {
             connection = dataSource.getConnection();
-            System.out.println("Schema : " + connection.getSchema());
-            System.out.println("Catalog : " + connection.getCatalog());
 
             String query = "SELECT * FROM dog WHERE dog_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -63,8 +61,6 @@ public class GetDog implements GetDogLocal {
         Connection connection;
         try {
             connection = dataSource.getConnection();
-            System.out.println("Schema : " + connection.getSchema());
-            System.out.println("Catalog : " + connection.getCatalog());
 
             String query = "SELECT * FROM dog";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -91,8 +87,6 @@ public class GetDog implements GetDogLocal {
         Connection connection;
         try {
             connection = dataSource.getConnection();
-            System.out.println("Schema : " + connection.getSchema());
-            System.out.println("Catalog : " + connection.getCatalog());
 
             String query = "SELECT COUNT(*) FROM dog";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -118,8 +112,6 @@ public class GetDog implements GetDogLocal {
         Connection connection;
         try {
             connection = dataSource.getConnection();
-            System.out.println("Schema : " + connection.getSchema());
-            System.out.println("Catalog : " + connection.getCatalog());
 
             String query = "SELECT * FROM dog LIMIT ? OFFSET ?";
             PreparedStatement pstmt = connection.prepareStatement(query);

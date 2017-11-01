@@ -45,6 +45,7 @@ public class DisplayDogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Gestion des paramètres de pagination : on commence par les récupérer
+        System.out.println("Servlet-display::GET");
         String pageParam = request.getParameter(ATTRIBUT_PAGE);
         String dogsInPageParam = request.getParameter(ATTRIBUT_ENTRY);
 
@@ -58,13 +59,13 @@ public class DisplayDogServlet extends HttpServlet {
         if (dogsInPageParam != null && !dogsInPageParam.isEmpty())
             defaultDogsInPage = Integer.parseInt(dogsInPageParam);
 
-        System.out.println(defaultPageNumber);
-        System.out.println(defaultDogsInPage);
-
+        System.out.println("Servlet-display::GET - nb page " + defaultPageNumber + " nb chien/page " + defaultDogsInPage);
+        
         int pageMax = (getDog.findNumberOfDog() - 1) / defaultDogsInPage + 1;
         int previousPageNumber = (defaultPageNumber > 1 ? defaultPageNumber - 1 : 1);
         int nextPageNumber = (defaultPageNumber < pageMax ? defaultPageNumber + 1 : pageMax);
 
+        System.out.println("Servlet-display::GET - creation lien de navigation entre les pages");
         URI firstPage = createLink.ServletDisplayPage(1, defaultDogsInPage);
         URI previousPage = createLink.ServletDisplayPage(previousPageNumber, defaultDogsInPage);
         URI nextPage = createLink.ServletDisplayPage(nextPageNumber, defaultDogsInPage);
@@ -75,12 +76,15 @@ public class DisplayDogServlet extends HttpServlet {
         List<DogDTO> dogs = getDog.findDogsPages(defaultPageNumber - 1, defaultDogsInPage);
 
         // Création des liens de suppressions des chiens
+        System.out.println("Servlet-display::GET - creation lien Servlet Delete");
         List<URI> urisDelete = createLink.ServletDelete(dogs, defaultPageNumber, defaultDogsInPage);
         List<String> urisDeleteS = createLink.createStringLinks(urisDelete);
 
+        System.out.println("Servlet-display::GET - creation lien Servlet Update");
         List<URI> urisUpdate = createLink.ServletUpdate(dogs, defaultPageNumber, defaultDogsInPage);
         List<String> urisUpdateS = createLink.createStringLinks(urisUpdate);
 
+        System.out.println("Servlet-display::GET - creation lien pour le nombre de dog par pages");
         List<URI> urisEntries = createLink.ServletDisplayPage(defaultPageNumber, entriesValues);
         List<String> urisEntriesS = createLink.createStringLinks(urisEntries);
 

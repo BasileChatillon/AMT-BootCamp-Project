@@ -22,8 +22,6 @@ public class DeleteDog implements DeleteDogLocal {
         Connection connection;
         try {
             connection = dataSource.getConnection();
-            System.out.println("Schema : " + connection.getSchema());
-            System.out.println("Catalog : " + connection.getCatalog());
 
             String query = "DELETE FROM dog WHERE dog_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);

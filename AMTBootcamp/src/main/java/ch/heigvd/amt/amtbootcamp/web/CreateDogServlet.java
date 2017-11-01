@@ -43,6 +43,7 @@ public class CreateDogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Forward de la requête
+        System.out.println("Servlet-Create::GET");
         request.getRequestDispatcher("/WEB-INF/pages/DogCreate.jsp").forward(request, response);
     }
 
@@ -58,6 +59,8 @@ public class CreateDogServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        System.out.println("Servlet-Create::POST");
+        
         String nameCheck = request.getParameter(ATTRIBUT_NAME);
         String ageCheck = request.getParameter(ATTRIBUT_AGE);
         String weightCheck = request.getParameter(ATTRIBUT_WEIGHT);
@@ -79,6 +82,8 @@ public class CreateDogServlet extends HttpServlet {
 
         URL link = createLink.APICustom().toURL();
 
+        System.out.println("Servlet-Create::Post - link de creation " + link.toString());
+        
         HttpURLConnection con = (HttpURLConnection) link.openConnection();
         con.setDoOutput(true);
         con.setDoInput(true);
@@ -102,6 +107,7 @@ public class CreateDogServlet extends HttpServlet {
         int HttpResult = con.getResponseCode();
         con.disconnect();
 
+        System.out.println("Servlet-Create::Post - lien de redirection + " + createLink.getServletDeletePath());
         // Forward de la requête
         response.sendRedirect(createLink.getServletDisplayPath());
     }
@@ -113,7 +119,7 @@ public class CreateDogServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Création d'un chien";
+        return "Creation d'un chien";
     }// </editor-fold>
 
 }

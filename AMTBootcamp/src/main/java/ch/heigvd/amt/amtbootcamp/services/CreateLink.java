@@ -13,6 +13,7 @@ import javax.ws.rs.core.UriBuilder;
 public class CreateLink implements CreateLinkLocal {
 
     private final String pathDocker = "http://localhost:9090/AMTBootcamp-1.0-SNAPSHOT/";
+    //private final String pathDocker = "http://192.168.99.100:9090/AMTBootcamp-1.0-SNAPSHOT/";
     private final String pathAPI = "api/";
     private final String pathDeleteServlet = "dog/delete";
     private final String pathCreateServlet = "dog/create";
@@ -24,7 +25,6 @@ public class CreateLink implements CreateLinkLocal {
     private final String ATTRIBUT_PAGE = "page";
     private final String ATTRIBUT_ENTRY = "entry";
 
-    /**** Fonction pour récupérer les différents path ****/
     @Override
     public String getAPIPath() {
         return pathDocker + pathAPI;

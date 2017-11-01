@@ -35,6 +35,7 @@ public class DeleteDogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Servlet-delete::GET");
         // Gestion des paramètres de pagination : on commence par les récupérer
         String dogIdDelete = request.getParameter(ATTRIBUT_ID);
         String pageParam = request.getParameter(ATTRIBUT_PAGE);
@@ -48,15 +49,17 @@ public class DeleteDogServlet extends HttpServlet {
         else
             linkReturn = createLink.getServletDisplayPath();
 
-        System.out.println("ch.heigvd.amt.amtbootcamp.web.DeleteDogServlet.doGet()" + linkReturn);
+        System.out.println("Servlet-delete::GET - lien de retour" + linkReturn);
 
         if (dogIdDelete != null && !dogIdDelete.isEmpty()) {
-            int id = Integer.parseInt(request.getParameter(ATTRIBUT_ID));
+            int id = Integer.parseInt(dogIdDelete);
 
             URI link = createLink.APIDelete(id);
+            System.out.println("Servlet-delete::GET - lien api de suppression" + link.toString());
             InputStream rsp = link.toURL().openStream();
         }
 
+        System.out.println("Servlet-delete::GET - lien de redirection" + linkReturn);
         // Forward de la requête
         response.sendRedirect(linkReturn);
     }
